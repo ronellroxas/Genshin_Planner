@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp">
+
+    <ImageView
+        android:id="@+id/iv_list_plan_character"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/albedo" />
+
+    <ImageButton
+        android:id="@+id/imageButton4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:cropToPadding="true"
+        android:tint="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_more" />
+
+    <TextView
+        android:id="@+id/tv_list_plan_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Plan Title"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+        app:layout_constraintStart_toEndOf="@+id/iv_list_plan_character"
+        app:layout_constraintTop_toTopOf="@+id/iv_list_plan_character" />
+
+    <TextView
+        android:id="@+id/tv_list_plan_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Howardmalakas"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/iv_list_plan_character"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_plan_title" />
+
+    <TextView
+        android:id="@+id/tv_resintext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Minimum Resin:"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/iv_list_plan_character"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_plan_user" />
+
+    <TextView
+        android:id="@+id/tv_resintext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rating:"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/iv_list_plan_character"
+        app:layout_constraintTop_toBottomOf="@+id/tv_resintext" />
+
+    <TextView
+        android:id="@+id/tv_resintext3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Items"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="@+id/iv_list_plan_character"
+        app:layout_constraintTop_toBottomOf="@+id/iv_list_plan_character" />
+
+    <TextView
+        android:id="@+id/tv_list_plan_user3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="803678969"
+        android:textColor="#FF9401"
+        app:layout_constraintStart_toEndOf="@+id/tv_list_plan_user2"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_plan_title" />
+
+    <TextView
+        android:id="@+id/tv_list_plan_user2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="|"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_list_plan_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_list_plan_title" />
+
+    <TextView
+        android:id="@+id/tv_list_plan_resin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="300"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/tv_resintext"
+        app:layout_constraintTop_toTopOf="@+id/tv_resintext" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="20dp"
+        android:layout_height="18dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="true"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_list_plan_resin"
+        app:layout_constraintStart_toEndOf="@+id/tv_list_plan_resin"
+        app:layout_constraintTop_toTopOf="@+id/tv_list_plan_resin"
+        app:srcCompat="@drawable/item_fragile_resin" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_resintext2"
+        app:layout_constraintStart_toEndOf="@+id/tv_resintext2"
+        app:layout_constraintTop_toTopOf="@+id/tv_resintext2" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_data_list_plan"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton4"
+        app:layout_constraintStart_toStartOf="@+id/iv_list_plan_character"
+        app:layout_constraintTop_toBottomOf="@+id/tv_resintext3" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

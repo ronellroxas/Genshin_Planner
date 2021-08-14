@@ -28,7 +28,7 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListView
     @Override
     public CharacterListViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.activity_character_list, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.data_list_character, parent, false);
         CharacterListViewHolder clViewHolder = new CharacterListViewHolder(itemView);
 
         return clViewHolder;

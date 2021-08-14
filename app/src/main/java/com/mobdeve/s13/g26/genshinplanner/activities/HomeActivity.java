@@ -13,6 +13,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageButton btnViewCharacters;
     private ImageView  imageView;
+    private ImageButton btnViewSavedPlans;
+    private ImageButton btnCreatePlans;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,18 +22,20 @@ public class HomeActivity extends AppCompatActivity {
 
         this.imageView = findViewById(R.id.imageView);
         this.btnViewCharacters = findViewById(R.id.btn_home_vwchar);
+        this.btnViewSavedPlans = findViewById(R.id.btn_home_svdplans);
 
-        imageView.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, ViewProfileActivity.class);
-
-            startActivity(intent);
-        });
-
-        btnViewCharacters.setOnClickListener(v -> {
+        this.btnViewCharacters.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, ListActivity.class);
 
             startActivity(intent);
         });
+
+        this.btnViewSavedPlans.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, PlanListActivity.class);
+
+            startActivity(intent);
+        });
+
     }
 
 }
