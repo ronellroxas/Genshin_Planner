@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.btnGoogle =  findViewById(R.id.bnt_home_google);
+        this.btnGoogle =  findViewById(R.id.btn_main_google);
 
         btnGoogle.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
