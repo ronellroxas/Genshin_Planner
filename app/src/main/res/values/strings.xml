@@ -25,6 +25,18 @@
     <string name="Signout">Signout</string>
     <string name="nunber">8</string>
     <string name="back">Back</string>
-    <!-- Next -->
+    
+    <!-- View Character  -->
+    <string name="name">Name: </string>
+    <string name="weapon">Weapon: </string>
+    <string name="element">Element: </string>
+    <string name="rarity">Rarity: </string>
+    <string name="ascension_mats">Ascension Materials</string>
+    <string name="talent_mats">Talent Materials</string>
+    <string name="sample_name">Raiden Shogun</string>
+    <string name="sample_weap">Polearm</string>
+    <string name="sample_element">Electro</string>
+    <string name="sample_stars">5 Stars</string>
 
+    
 </resources>
