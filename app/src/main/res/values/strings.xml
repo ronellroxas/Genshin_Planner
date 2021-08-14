@@ -16,7 +16,7 @@
     <string name="sample_UID">803678969</string>
     <string name="sample_email">howard_montecillo@malakas.com</string>
     <string name="character">Characters</string>
-    <string name="character_edit"><u>Edit Characters</u></string>
+    <string name="character_edit">Edit Characters</string>
     <string name="create_plans">Created Plans</string>
     <string name="shared_plans">Shared Plans</string>
     <string name="saved_plans">Saved Plans</string>
@@ -24,6 +24,7 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="Signout">Signout</string>
     <string name="nunber">8</string>
+    <string name="back">Back</string>
     <!-- Next -->
 
 </resources>

@@ -85,14 +85,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.50" />
+        app:layout_constraintGuide_percent="0.52" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_bot_plans"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.73" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_bot_main"
@@ -165,6 +165,7 @@
         android:layout_height="wrap_content"
         android:text="@string/character_edit"
         android:textColor="#FF9401"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/label_characters"
         app:layout_constraintEnd_toStartOf="@+id/gl_right_main" />
 
@@ -172,7 +173,7 @@
         android:id="@+id/view"
         android:layout_width="0dp"
         android:layout_height="2dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="#8AFFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_left_main"
@@ -206,7 +207,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gl_bot_main"></LinearLayout>
+        app:layout_constraintTop_toTopOf="@+id/gl_bot_main"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/label_created_plans"
@@ -282,5 +284,39 @@
         app:layout_constraintStart_toStartOf="@+id/label_saved_plans"
         app:layout_constraintTop_toBottomOf="@+id/label_saved_plans"
         app:layout_constraintVertical_bias="0.120000005" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_all_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/view_all_plans"
+        android:textColor="#FF9401"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/label_created_plans"
+        app:layout_constraintStart_toStartOf="@+id/label_created_plans"
+        app:layout_constraintTop_toBottomOf="@+id/tv_view_prof_shared_plans"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <Button
+        android:id="@+id/btn_view_prof_save_prof"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/save_profile"
+        android:background="#FF9401"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toTopOf="@+id/gl_bot_plans" />
+
+    <Button
+        android:id="@+id/btn_view_prof_signout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Signout"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bot_main"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toBottomOf="@+id/btn_view_prof_save_prof" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
