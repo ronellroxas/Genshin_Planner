@@ -1,4 +1,6 @@
 <resources>
+
+    <!--  Register Profile  -->
     <string name="app_name">Genshin Planner</string>
     <string name="profile">Profile</string>
     <string name="full_name">Full Name</string>
@@ -7,4 +9,21 @@
     <string name="genshin_uid">Genshin UID</string>
     <string name="genshin_main"> Genshin Main</string>
     <string name="save_profile">Save Profile</string>
+
+    <!--  View Profile  -->
+    <string name="middle_profile">|</string>
+    <string name="sample_username"> howardmalakas</string>
+    <string name="sample_UID">803678969</string>
+    <string name="sample_email">howard_montecillo@malakas.com</string>
+    <string name="character">Characters</string>
+    <string name="character_edit"><u>Edit Characters</u></string>
+    <string name="create_plans">Created Plans</string>
+    <string name="shared_plans">Shared Plans</string>
+    <string name="saved_plans">Saved Plans</string>
+    <string name="view_all_plans">View All Plans</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="Signout">Signout</string>
+    <string name="nunber">8</string>
+    <!-- Next -->
+
 </resources>

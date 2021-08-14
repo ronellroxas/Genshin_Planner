@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:backgroundTint="#66000000"
+    android:backgroundTintMode="src_over"
+    tools:context=".activities.ViewProfileActivity">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/baal"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bot_profile"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_profile"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_profile"
+        app:layout_constraintTop_toTopOf="@+id/gl_top_main"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_left_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.06" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_left_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_right_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_right_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_top_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.06" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_top_character_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bot_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.22" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_top_characters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.40" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bot_characters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bot_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bot_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.91" />
+
+    <TextView
+        android:id="@+id/middle_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/middle_profile"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_username"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/middle_section"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toTopOf="@+id/middle_section" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_uid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sample_UID"
+        android:textColor="#FF9401"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toEndOf="@+id/middle_section"
+        app:layout_constraintTop_toTopOf="@+id/middle_section" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/sample_email"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toBottomOf="@+id/middle_section" />
+
+    <TextView
+        android:id="@+id/label_characters"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/character"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toTopOf="@+id/gl_top_character_list" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_edit_char"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/character_edit"
+        android:textColor="#FF9401"
+        app:layout_constraintBottom_toBottomOf="@+id/label_characters"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="16dp"
+        android:background="#8AFFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toTopOf="@+id/gl_bot_characters" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:layout_marginBottom="16dp"
+        android:background="#8AFFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bot_plans"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bot_characters"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toTopOf="@+id/gl_top_characters" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#FF9400"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gl_bot_main"></LinearLayout>
+
+    <TextView
+        android:id="@+id/label_created_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/shared_plans"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <TextView
+        android:id="@+id/label_create_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_plans"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/label_created_plans"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
+        app:layout_constraintTop_toTopOf="@+id/label_created_plans" />
+
+    <TextView
+        android:id="@+id/label_saved_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saved_plans"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/label_created_plans"
+        app:layout_constraintTop_toTopOf="@+id/label_created_plans" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_created_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nunber"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/label_create_plans"
+        app:layout_constraintStart_toStartOf="@+id/label_create_plans"
+        app:layout_constraintTop_toBottomOf="@+id/label_create_plans"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_shared_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nunber"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/label_created_plans"
+        app:layout_constraintStart_toStartOf="@+id/label_created_plans"
+        app:layout_constraintTop_toBottomOf="@+id/label_created_plans"
+        app:layout_constraintVertical_bias="0.30" />
+
+    <TextView
+        android:id="@+id/tv_view_prof_saved_plans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nunber"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="@+id/label_saved_plans"
+        app:layout_constraintStart_toStartOf="@+id/label_saved_plans"
+        app:layout_constraintTop_toBottomOf="@+id/label_saved_plans"
+        app:layout_constraintVertical_bias="0.120000005" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
