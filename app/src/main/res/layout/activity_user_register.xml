@@ -12,7 +12,7 @@
         android:layout_height="0dp"
         android:orientation="vertical"
 
-        app:layout_constraintBottom_toTopOf="@+id/btn_save_profile"
+        app:layout_constraintBottom_toTopOf="@+id/btn_register_saveprofile"
         app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/gl_left_main"
@@ -154,7 +154,7 @@
         app:layout_constraintGuide_percent="0.84" />
 
     <Button
-        android:id="@+id/btn_save_profile"
+        android:id="@+id/btn_register_saveprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/save_profile"
