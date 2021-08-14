@@ -30,6 +30,12 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        imageView.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ViewProfileActivity.class);
+
+            startActivity(intent);
+        });
+
         this.btnViewSavedPlans.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, PlanListActivity.class);
 
