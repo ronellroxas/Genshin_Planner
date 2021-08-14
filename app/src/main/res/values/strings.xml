@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Genshin Planner</string>
+    <string name="profile">Profile</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="username">Username</string>
+    <string name="genshin_uid">Genshin UID</string>
+    <string name="genshin_main"> Genshin Main</string>
+    <string name="save_profile">Save Profile</string>
 </resources>
