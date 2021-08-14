@@ -12,6 +12,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private ImageButton btnViewCharacters;
     private ImageButton btnViewSavedPlans;
+    private ImageButton btnCreatePlans;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
