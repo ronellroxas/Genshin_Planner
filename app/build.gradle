@@ -29,6 +29,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation 'com.intellij:annotations:+@jar'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'

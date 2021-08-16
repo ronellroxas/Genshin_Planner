@@ -1,6 +1,5 @@
 <resources>
-
-    <!--  Register Profile  -->
+    <string name="default_web_client_id">631675554048-2olme3ufle1rq96rb6pvpmqjtdn4rm0q.apps.googleusercontent.com</string>
     <string name="app_name">Genshin Planner</string>
     <string name="profile">Profile</string>
     <string name="full_name">Full Name</string>
@@ -25,7 +24,7 @@
     <string name="Signout">Signout</string>
     <string name="nunber">8</string>
     <string name="back">Back</string>
-    
+
     <!-- View Character  -->
     <string name="name">Name: </string>
     <string name="weapon">Weapon: </string>
@@ -37,6 +36,4 @@
     <string name="sample_weap">Polearm</string>
     <string name="sample_element">Electro</string>
     <string name="sample_stars">5 Stars</string>
-
-    
 </resources>
