@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_rectangle"
+        android:background="@drawable/shape_rounded_rectangle"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
@@ -90,7 +90,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_rectangle"
+        android:background="@drawable/shape_rounded_rectangle"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
@@ -103,7 +103,7 @@
         android:layout_width="0dp"
         android:layout_height="18dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/rounded_rectangle"
+        android:background="@drawable/shape_rounded_rectangle"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Resin"
@@ -133,7 +133,7 @@
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_rectangle"
+        android:background="@drawable/shape_rounded_rectangle"
         android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
@@ -146,7 +146,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_rectangle"
+        android:background="@drawable/shape_rounded_rectangle"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -180,7 +180,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/et_create_plan_resin"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintTop_toTopOf="@+id/et_create_plan_resin"
-        app:srcCompat="@drawable/item_fragile_resin" />
+        app:srcCompat="@drawable/characters_item_fragile_resin" />
 
     <Button
         android:id="@+id/btn_create_plan_save"
