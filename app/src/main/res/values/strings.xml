@@ -1,5 +1,4 @@
 <resources>
-    <string name="default_web_client_id">631675554048-2olme3ufle1rq96rb6pvpmqjtdn4rm0q.apps.googleusercontent.com</string>
     <string name="app_name">Genshin Planner</string>
     <string name="profile">Profile</string>
     <string name="full_name">Full Name</string>

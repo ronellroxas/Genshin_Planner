@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "631675554048",
+    "project_id": "genshin-planner-323108",
+    "storage_bucket": "genshin-planner-323108.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:631675554048:android:ea63cc5c069432e8874be5",
+        "android_client_info": {
+          "package_name": "com.mobdeve.s13.g26.genshinplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "631675554048-2olme3ufle1rq96rb6pvpmqjtdn4rm0q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mobdeve.s13.g26.genshinplanner",
+            "certificate_hash": "e21dc1c58f133af65d61316c4c8b0b3765968a88"
+          }
+        },
+        {
+          "client_id": "631675554048-04f4483ntpo2v8p8nnfun162gmgbmtns.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKO2vcJs1aAqVE5Zl9fU7ZBcFp2srz7hE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "631675554048-04f4483ntpo2v8p8nnfun162gmgbmtns.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
