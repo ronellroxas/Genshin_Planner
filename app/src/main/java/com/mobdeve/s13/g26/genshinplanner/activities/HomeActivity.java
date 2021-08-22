@@ -25,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
         this.btnViewSavedPlans = findViewById(R.id.btn_home_svdplans);
 
         this.btnViewCharacters.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, ListActivity.class);
+            Intent intent = new Intent(HomeActivity.this, CharacterListActivity.class);
 
             startActivity(intent);
         });

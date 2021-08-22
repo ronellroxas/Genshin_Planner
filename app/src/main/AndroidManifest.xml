@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GenshinPlanner">
         <activity android:name=".activities.ViewCharacterActivity"></activity>
-        <activity android:name=".activities.ListActivity" />
+        <activity android:name=".activities.CharacterListActivity" />
         <activity android:name=".activities.ViewProfileActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.HomeActivity" />

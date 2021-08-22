@@ -5,17 +5,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.CharacterListAdapter;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class ListActivity extends AppCompatActivity {
+public class CharacterListActivity extends AppCompatActivity {
 
     private ArrayList<Integer> charList;
 
@@ -25,7 +22,7 @@ public class ListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_character_list);
         charList = new ArrayList<Integer>();
         initRecyclerAdapter();
     }
@@ -46,7 +43,7 @@ public class ListActivity extends AppCompatActivity {
             for (int i = 0; i < fields.length; i++) {
                 String filename = fields[i].getName();
 
-                if (!filename.contains("_") && !filename.contains("background")) //remove filenames with _
+                if (filename.contains("characters_")) //remove filenames with _
                     this.charList.add(fields[i].getInt(null));
             }
         }

@@ -119,7 +119,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/tv_list_plan_resin"
         app:layout_constraintStart_toEndOf="@+id/tv_list_plan_resin"
         app:layout_constraintTop_toTopOf="@+id/tv_list_plan_resin"
-        app:srcCompat="@drawable/characters_item_fragile_resin" />
+        app:srcCompat="@drawable/item_fragile_resin" />
 
     <RatingBar
         android:id="@+id/ratingBar"

@@ -180,7 +180,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/et_create_plan_resin"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
         app:layout_constraintTop_toTopOf="@+id/et_create_plan_resin"
-        app:srcCompat="@drawable/characters_item_fragile_resin" />
+        app:srcCompat="@drawable/item_fragile_resin" />
 
     <Button
         android:id="@+id/btn_create_plan_save"
