@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
-import com.mobdeve.s13.g26.genshinplanner.views.CharacterListViewHolder;
 import com.mobdeve.s13.g26.genshinplanner.views.PlanListViewHolder;
 
 import org.jetbrains.annotations.NotNull;

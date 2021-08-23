@@ -19,7 +19,7 @@ public class CharacterListViewHolder extends RecyclerView.ViewHolder {
         this.ibCharacter = itemView.findViewById(R.id.ib_charlist_character);
     }
 
-    public void setImageCharacter(int img) {
-        this.ibCharacter.setImageResource(img);
-    }
+    public void setImageCharacter(int img) { this.ibCharacter.setImageResource(img); }
+
+    public void setListeners(View.OnClickListener e){ ibCharacter.setOnClickListener(e);}
 }
