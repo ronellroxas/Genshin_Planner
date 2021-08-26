@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenshinPlanner">
+        <activity android:name=".activities.ViewItemActivity"></activity>
         <activity android:name=".activities.ItemListActivity" />
         <activity android:name=".activities.ViewCharacterActivity" />
         <activity android:name=".activities.CharacterListActivity" />

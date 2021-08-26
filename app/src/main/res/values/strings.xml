@@ -1,6 +1,4 @@
 <resources>
-<!--    <string name="default_web_client_id" translatable="false">631675554048-04f4483ntpo2v8p8nnfun162gmgbmtns.apps.googleusercontent.com</string>-->
-
     <!-- Login -->
     <string name="app_name">Genshin Planner</string>
     <string name="profile">Profile</string>
@@ -38,4 +36,10 @@
     <string name="sample_weap">Polearm</string>
     <string name="sample_element">Electro</string>
     <string name="sample_stars">5 Stars</string>
+
+    <!-- View Item -->
+    <string name="sample_item_name">Crystalline Bloom</string>
+    <string name="type">Type: Charcter Ascension Material, Weapon Ascension Materials, Talent Ascension Material</string>
+    <string name="obtain">How to Obtain:</string>
+    <string name="sample_obtain">\u2022 Dropped by Level 60 Nobushi\n\u2022 Forged through 3 Kageuchi Handguard\n\u2022 Buying through Paimon's Bargains</string>
 </resources>

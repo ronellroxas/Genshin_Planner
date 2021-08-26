@@ -31,6 +31,7 @@ public class CharacterListActivity extends AppCompatActivity {
 
     private void initRecyclerAdapter() {
         //getImageResources();    //get all img filenames in res folder (self-declared)
+        loadData();
         this.rvList = findViewById(R.id.rv_list);
         this.clAdapter = new CharacterListAdapter(this.charList);
 
@@ -42,9 +43,42 @@ public class CharacterListActivity extends AppCompatActivity {
         ArrayList<Integer> ascen_mats = new ArrayList<>();
         ascen_mats.add(R.drawable.item_char_ascen_cryo_gemstone);
         ascen_mats.add(R.drawable.item_char_ascen_perpetual_heart);
+        ascen_mats.add(R.drawable.item_world_sakura_bloom);
+        ascen_mats.add(R.drawable.item_mob_famed_handguard);
 
         ArrayList<Integer> talent_mats = new ArrayList<>();
+        talent_mats.add(R.drawable.item_tal_philo_elegance);
+        talent_mats.add(R.drawable.item_week_frog_branch);
+        talent_mats.add(R.drawable.item_tal_crown);
+        talent_mats.add(R.drawable.item_mob_famed_handguard);
+
         charList.add(new Character(R.drawable.characters_ayaka, "Kamisato Ayaka", 2, 6, 5, ascen_mats, talent_mats));
+        ascen_mats.clear();
+        talent_mats.clear();
+
+        ascen_mats.add(R.drawable.item_char_ascen_pyro_gemstone);
+        ascen_mats.add(R.drawable.item_char_ascen_everflame_seed);
+        ascen_mats.add(R.drawable.item_world_lamp_grass);
+        ascen_mats.add(R.drawable.item_mob_weathered_arrow);
+
+        talent_mats.add(R.drawable.item_tal_philo_freedom);
+        talent_mats.add(R.drawable.item_week_dragon_sigh);
+        talent_mats.add(R.drawable.item_tal_crown);
+        talent_mats.add(R.drawable.item_mob_weathered_arrow);
+        charList.add(new Character(R.drawable.characters_amber, "Amber", 4, 2, 4, ascen_mats, talent_mats));
+        ascen_mats.clear();
+        talent_mats.clear();
+
+        ascen_mats.add(R.drawable.item_char_ascen_pyro_gemstone);
+        ascen_mats.add(R.drawable.item_char_ascen_everflame_seed);
+        ascen_mats.add(R.drawable.item_world_philanemo_mushroom);
+        ascen_mats.add(R.drawable.item_mob_forbidden_curse_scroll);
+
+        talent_mats.add(R.drawable.item_tal_philo_freedom);
+        talent_mats.add(R.drawable.item_week_wolf_ring);
+        talent_mats.add(R.drawable.item_tal_crown);
+        talent_mats.add(R.drawable.item_mob_forbidden_curse_scroll);
+        charList.add(new Character(R.drawable.characters_klee, "Klee", 5, 2, 5, ascen_mats, talent_mats));
 
     }
 

@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
+
                 Toast.makeText(MainActivity.this, "Authentication failed.",
                         Toast.LENGTH_SHORT).show();
             }
@@ -186,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("GAUTH:", "signInWithCredential:failure", task.getException());
-
                         }
                     }
                 });
