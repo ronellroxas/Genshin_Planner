@@ -1,16 +1,24 @@
 package com.mobdeve.s13.g26.genshinplanner.models;
 
 public class User {
+    private String userId;
     private String email;
     private String name;
-    private String uid;
+    private String uid; //genshin uid
     private String main;
 
-    public User(String email, String name, String uid, String main) {
+    public User() { }
+
+    public User(String userId, String email, String name, String uid, String main) {
+        this.userId = userId;
         this.email = email;
         this.name = name;
         this.uid = uid;
         this.main = main;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getEmail() {
@@ -43,5 +51,14 @@ public class User {
 
     public void setMain(String main) {
         this.main = main;
+    }
+
+    @Override
+    public String toString() {
+        return  "email: " + this.email + "\n" +
+                "name: " + this.name + "\n" +
+                "uid: " + this.uid + "\n" +
+                "main: " + this.main;
+
     }
 }
