@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,5 +36,9 @@ public class FirebaseUserDBHelper {
 
     public DatabaseReference getReference() {
         return userRef;
+    }
+
+    public void logout() {
+        FirebaseAuth.getInstance().signOut();
     }
 }

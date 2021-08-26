@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GenshinPlanner">
-        <activity android:name=".activities.ViewItemActivity"></activity>
+        <activity android:name=".activities.ViewItemActivity"/>
         <activity android:name=".activities.ItemListActivity" />
+        <activity android:name=".activities.PlanListActivity" />
         <activity android:name=".activities.ViewCharacterActivity" />
         <activity android:name=".activities.CharacterListActivity" />
         <activity android:name=".activities.ViewProfileActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.CreatePlanActivity"/>
         <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
