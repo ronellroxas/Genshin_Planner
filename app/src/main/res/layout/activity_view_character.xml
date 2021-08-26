@@ -65,33 +65,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.57" />
+        app:layout_constraintGuide_percent="0.63" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_bot_materials"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.72" />
+        app:layout_constraintGuide_percent="0.79" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_bot_talent_materials"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.87" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#FF9400"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gl_bot_main">
-
-    </LinearLayout>
+        app:layout_constraintGuide_percent="0.95" />
 
     <ImageView
         android:id="@+id/iv_char_picture"
@@ -144,8 +132,10 @@
         android:text="@string/rarity"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/label_ascension_material"
         app:layout_constraintStart_toStartOf="@+id/gl_left_main"
-        app:layout_constraintTop_toBottomOf="@+id/label_element" />
+        app:layout_constraintTop_toBottomOf="@+id/label_element"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/label_ascension_material"
