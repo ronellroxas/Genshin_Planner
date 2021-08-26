@@ -11,7 +11,10 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,20 +35,29 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.mobdeve.s13.g26.genshinplanner.R;
+import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.User;
+import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
+
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
     private GoogleSignInClient mGoogleSignInClient;
     private SignInButton btnGoogle;
     private FirebaseAuth mAuth;
-
+    private SharedPreferences sp;
+    private FirebaseUserDBHelper userdbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        userdbHelper = new FirebaseUserDBHelper();
 
         initializeGoogleAuth();
         mAuth = FirebaseAuth.getInstance();
@@ -63,58 +75,9 @@ public class MainActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null) {
-            createUser(currentUser);
-            authSuccess();
+            authSuccess(currentUser);
         }
 
-    }
-
-    private void authSuccess() {
-        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-
-        startActivity(intent);
-    }
-
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("GAUTH:", "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            authSuccess();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("GAUTH:", "signInWithCredential:failure", task.getException());
-
-                        }
-                    }
-                });
-    }
-
-    private void createUser(FirebaseUser user) {
-        String email = user.getEmail();
-        mAuth.createUserWithEmailAndPassword(email, "NONE")
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("AUTH", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            authSuccess();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("FAIL", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-                });
     }
 
     /**
@@ -137,6 +100,58 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, 1);
     }
 
+    private void authSuccess(FirebaseUser user) {
+        userdbHelper.getReference().orderByValue().equalTo(user.getEmail()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                Intent intent = null;
+                if(snapshot.exists()) {
+                    intent = new Intent(MainActivity.this, HomeActivity.class);
+                }
+                else {
+                    intent = new Intent(MainActivity.this, RegisterActivity.class);
+                }
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+        sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor spEditor = sp.edit();
+        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+
+        spEditor.putString(UserKeys.ID_KEY.name(), user.getUid());
+        spEditor.putString(UserKeys.EMAIL_KEY.name(), user.getEmail());
+        spEditor.putString(UserKeys.NAME_KEY.name(), user.getDisplayName());
+        spEditor.apply();
+
+        startActivity(intent);
+    }
+
+    private void createUser(FirebaseUser user) {
+        String email = user.getEmail();
+        mAuth.createUserWithEmailAndPassword(email, "NONE")
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("AUTH", "createUserWithEmail:success");
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("FAIL", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -155,5 +170,25 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("GAUTH:", "signInWithCredential:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            authSuccess(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("GAUTH:", "signInWithCredential:failure", task.getException());
+
+                        }
+                    }
+                });
     }
 }
