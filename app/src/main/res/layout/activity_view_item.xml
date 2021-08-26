@@ -76,7 +76,7 @@
         app:layout_constraintGuide_percent="0.59" />
 
     <ImageView
-        android:id="@+id/iv_item_picture"
+        android:id="@+id/iv_view_item_picture"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/gl_bot_item"
@@ -86,7 +86,7 @@
         app:srcCompat="@drawable/item_char_ascen_crystalline_bloom" />
 
     <TextView
-        android:id="@+id/tv_name"
+        android:id="@+id/tv_view_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
@@ -121,11 +121,11 @@
         app:layout_constraintTop_toTopOf="@+id/gl_top_obtain" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/tv_view_item_obtain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:text="@string/sample_obtain"
+        android:text="@string/sample_item_name"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@id/gl_right_main"

@@ -22,4 +22,6 @@ public class ItemListViewHolder extends RecyclerView.ViewHolder {
     public void setImageCharacter(int img) {
         this.ibItem.setImageResource(img);
     }
+
+    public void setListeners(View.OnClickListener e){ this.ibItem.setOnClickListener(e);}
 }
