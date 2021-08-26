@@ -4,6 +4,7 @@ public enum UserKeys {
     ID_KEY,
     EMAIL_KEY,
     NAME_KEY,
+    USERNAME_KEY,
     UID_KEY,
     MAIN_KEY
 }
