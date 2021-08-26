@@ -26,7 +26,6 @@ public class FirebaseUserDBHelper {
     public FirebaseUserDBHelper() {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://genshin-planner-323108-default-rtdb.asia-southeast1.firebasedatabase.app/");
         userRef = database.getReference("users");
-        //userRef.child("ronell@roxas").setValue(new User("ronell@roxas", "ronell roxas", "69420", "Noelle"));
     }
 
 
