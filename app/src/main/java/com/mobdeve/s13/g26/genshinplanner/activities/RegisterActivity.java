@@ -1,5 +1,7 @@
 package com.mobdeve.s13.g26.genshinplanner.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,10 +15,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.User;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -46,17 +53,14 @@ public class RegisterActivity extends AppCompatActivity {
 
         initializeFields();
         btnSaveProfile.setOnClickListener(v -> {
-            if(isFormFilled()) {
+            if (isFormFilled()) {
                 Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
 
                 saveUser();
                 startActivity(intent);
+            } else {
+                Toast.makeText(RegisterActivity.this, "Please fill-up empty fields.", Toast.LENGTH_SHORT).show();
             }
-            else {
-                Toast.makeText(RegisterActivity.this, "Please fill-up empty fields.",
-                        Toast.LENGTH_SHORT).show();
-            }
-
         });
     }
 
