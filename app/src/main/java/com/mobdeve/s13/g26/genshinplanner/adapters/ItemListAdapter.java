@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewItemActivity;
+import com.mobdeve.s13.g26.genshinplanner.keys.ItemKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
 import com.mobdeve.s13.g26.genshinplanner.views.CharacterListViewHolder;
 import com.mobdeve.s13.g26.genshinplanner.views.ItemListViewHolder;
@@ -19,11 +20,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 public class ItemListAdapter extends RecyclerView.Adapter<ItemListViewHolder> {
-
-    public static final String KEY_PICTURE = "KEY_PICTURE";
-    public static final String KEY_NAME = "KEY_NAME";
-    public static final String KEY_TYPE = "KEY_TYPE";
-    public static final String KEY_OBTAIN = "KEY_OBTAIN";
 
     private ArrayList<Item> itemList;
 
@@ -54,10 +50,10 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListViewHolder> {
                     obtain = obtain + "\u2022 " + curr_item.getItem_obtain_ways().get(j) + "\n";
                 }
 
-                intent.putExtra(KEY_PICTURE, curr_item.getItem_img());
-                intent.putExtra(KEY_NAME, curr_item.getItem_name());
-                intent.putExtra(KEY_TYPE, type);
-                intent.putExtra(KEY_OBTAIN, obtain);
+                intent.putExtra(ItemKeys.KEY_PICTURE.name(), curr_item.getItem_img());
+                intent.putExtra(ItemKeys.KEY_NAME.name(), curr_item.getItem_name());
+                intent.putExtra(ItemKeys.KEY_TYPE.name(), type);
+                intent.putExtra(ItemKeys.KEY_OBTAIN.name(), obtain);
 
                 v.getContext().startActivity(intent);
             }

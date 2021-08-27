@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.CharacterListAdapter;
+import com.mobdeve.s13.g26.genshinplanner.keys.CharacterKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Character;
 
 public class ViewCharacterActivity extends AppCompatActivity {
@@ -41,20 +42,20 @@ public class ViewCharacterActivity extends AppCompatActivity {
         this.iv_tal_mobmat = findViewById(R.id.iv_view_char_tal_mob_mat);
 
         Intent intent = getIntent();
-        this.iv_Character_img.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_PICTURE, 0));
-        this.tv_Character_name.setText(intent.getStringExtra(CharacterListAdapter.KEY_NAME));
-        this.tv_Character_weap.setText(intent.getStringExtra(CharacterListAdapter.KEY_WEAP));
-        this.tv_Character_element.setText(intent.getStringExtra(CharacterListAdapter.KEY_ELEMENT));
-        this.tv_Character_rarity.setText(intent.getStringExtra(CharacterListAdapter.KEY_RARITY));
+        this.iv_Character_img.setImageResource(intent.getIntExtra(CharacterKeys.KEY_PICTURE.name(), 0));
+        this.tv_Character_name.setText(intent.getStringExtra(CharacterKeys.KEY_NAME.name()));
+        this.tv_Character_weap.setText(intent.getStringExtra(CharacterKeys.KEY_WEAP.name()));
+        this.tv_Character_element.setText(intent.getStringExtra(CharacterKeys.KEY_ELEMENT.name()));
+        this.tv_Character_rarity.setText(intent.getStringExtra(CharacterKeys.KEY_RARITY.name()));
 
-        this.iv_elemat.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_ELE_MAT, 0));
-        this.iv_bossmat.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_BOSS_MAT, 0));
-        this.iv_worldmat.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_WORLD_MAT, 0));
-        this.iv_mobmat.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_MOB_MAT, 0));
+        this.iv_elemat.setImageResource(intent.getIntExtra(CharacterKeys.KEY_ELE_MAT.name(), 0));
+        this.iv_bossmat.setImageResource(intent.getIntExtra(CharacterKeys.KEY_BOSS_MAT.name(), 0));
+        this.iv_worldmat.setImageResource(intent.getIntExtra(CharacterKeys.KEY_WORLD_MAT.name(), 0));
+        this.iv_mobmat.setImageResource(intent.getIntExtra(CharacterKeys.KEY_MOB_MAT.name(), 0));
 
-        this.iv_talmat.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_TAL_MAT, 0));
-        this.iv_weekmat.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_WEEK_MAT, 0));
-        this.iv_crown.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_CROWN_MAT, 0));
-        this.iv_tal_mobmat.setImageResource(intent.getIntExtra(CharacterListAdapter.KEY_TAL_MOB_MAT, 0));
+        this.iv_talmat.setImageResource(intent.getIntExtra(CharacterKeys.KEY_TAL_MAT.name(), 0));
+        this.iv_weekmat.setImageResource(intent.getIntExtra(CharacterKeys.KEY_WEEK_MAT.name(), 0));
+        this.iv_crown.setImageResource(intent.getIntExtra(CharacterKeys.KEY_CROWN_MAT.name(), 0));
+        this.iv_tal_mobmat.setImageResource(intent.getIntExtra(CharacterKeys.KEY_TAL_MOB_MAT.name(), 0));
     }
 }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.ItemListAdapter;
+import com.mobdeve.s13.g26.genshinplanner.keys.ItemKeys;
 
 public class ViewItemActivity extends AppCompatActivity {
 
@@ -28,9 +29,9 @@ public class ViewItemActivity extends AppCompatActivity {
         this.tv_Item_obtain = findViewById(R.id.tv_view_item_obtain);
 
         Intent intent = getIntent();
-        this.iv_Item_picture.setImageResource(intent.getIntExtra(ItemListAdapter.KEY_PICTURE, 0));
-        this.tv_Item_name.setText(intent.getStringExtra(ItemListAdapter.KEY_NAME));
-        this.tv_Item_type.setText(intent.getStringExtra(ItemListAdapter.KEY_TYPE));
-        this.tv_Item_obtain.setText(intent.getStringExtra(ItemListAdapter.KEY_OBTAIN));
+        this.iv_Item_picture.setImageResource(intent.getIntExtra(ItemKeys.KEY_PICTURE.name(), 0));
+        this.tv_Item_name.setText(intent.getStringExtra(ItemKeys.KEY_NAME.name()));
+        this.tv_Item_type.setText(intent.getStringExtra(ItemKeys.KEY_TYPE.name()));
+        this.tv_Item_obtain.setText(intent.getStringExtra(ItemKeys.KEY_OBTAIN.name()));
     }
 }

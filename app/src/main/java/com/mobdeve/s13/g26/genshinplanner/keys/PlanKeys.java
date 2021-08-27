@@ -12,5 +12,4 @@ public enum PlanKeys {
     PLAN_DESCRIPTION_KEY,
     PLAN_RESIN_KEY,
     PLAN_RATING_KEY
-
 }

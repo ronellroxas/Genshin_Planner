@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewCharacterActivity;
+import com.mobdeve.s13.g26.genshinplanner.keys.CharacterKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Character;
 import com.mobdeve.s13.g26.genshinplanner.views.CharacterListViewHolder;
 
@@ -20,21 +21,6 @@ import java.util.ArrayList;
 
 public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListViewHolder> {
 
-    public static final String KEY_PICTURE = "KEY_PICTURE";
-    public static final String KEY_NAME = "KEY_NAME";
-    public static final String KEY_WEAP = "KEY_WEAP";
-    public static final String KEY_ELEMENT = "KEY_ELEMENT";
-    public static final String KEY_RARITY = "KEY_RARITY";
-
-    public static final String KEY_ELE_MAT = "KEY_ELE_MAT";
-    public static final String KEY_BOSS_MAT = "KEY_BOSS_MAT";
-    public static final String KEY_WORLD_MAT = "KEY_WORLD_MAT";
-    public static final String KEY_MOB_MAT = "KEY_MOB_MAT";
-
-    public static final String KEY_TAL_MAT = "KEY_TAL_MAT";
-    public static final String KEY_WEEK_MAT = "KEY_WEEK_MAT";
-    public static final String KEY_CROWN_MAT = "KEY_CROWN_MAT";
-    public static final String KEY_TAL_MOB_MAT = "KEY_TAL_MOB_MAT";
 
     private ArrayList<Character> charList;
 
@@ -59,21 +45,21 @@ public class CharacterListAdapter extends RecyclerView.Adapter<CharacterListView
                 String element = processEle(curr_char.getElement());
                 String rarity = curr_char.getRarity() + " Stars";
 
-                intent.putExtra(KEY_PICTURE, curr_char.getChar_image());
-                intent.putExtra(KEY_NAME, curr_char.getChar_name());
-                intent.putExtra(KEY_WEAP, weap);
-                intent.putExtra(KEY_ELEMENT, element);
-                intent.putExtra(KEY_RARITY, rarity);
+                intent.putExtra(CharacterKeys.KEY_PICTURE.name(), curr_char.getChar_image());
+                intent.putExtra(CharacterKeys.KEY_NAME.name(), curr_char.getChar_name());
+                intent.putExtra(CharacterKeys.KEY_WEAP.name(), weap);
+                intent.putExtra(CharacterKeys.KEY_ELEMENT.name(), element);
+                intent.putExtra(CharacterKeys.KEY_RARITY.name(), rarity);
 
-                intent.putExtra(KEY_ELE_MAT, curr_char.getAscension_mats().get(0));
-                intent.putExtra(KEY_BOSS_MAT, curr_char.getAscension_mats().get(1));
-                intent.putExtra(KEY_WORLD_MAT, curr_char.getAscension_mats().get(2));
-                intent.putExtra(KEY_MOB_MAT, curr_char.getAscension_mats().get(3));
+                intent.putExtra(CharacterKeys.KEY_ELE_MAT.name(), curr_char.getAscension_mats().get(0));
+                intent.putExtra(CharacterKeys.KEY_BOSS_MAT.name(), curr_char.getAscension_mats().get(1));
+                intent.putExtra(CharacterKeys.KEY_WORLD_MAT.name(), curr_char.getAscension_mats().get(2));
+                intent.putExtra(CharacterKeys.KEY_MOB_MAT.name(), curr_char.getAscension_mats().get(3));
 
-                intent.putExtra(KEY_TAL_MAT, curr_char.getTalent_mats().get(0));
-                intent.putExtra(KEY_WEEK_MAT, curr_char.getTalent_mats().get(1));
-                intent.putExtra(KEY_CROWN_MAT, curr_char.getTalent_mats().get(2));
-                intent.putExtra(KEY_TAL_MOB_MAT, curr_char.getTalent_mats().get(3));
+                intent.putExtra(CharacterKeys.KEY_TAL_MAT.name(), curr_char.getTalent_mats().get(0));
+                intent.putExtra(CharacterKeys.KEY_WEEK_MAT.name(), curr_char.getTalent_mats().get(1));
+                intent.putExtra(CharacterKeys.KEY_CROWN_MAT.name(), curr_char.getTalent_mats().get(2));
+                intent.putExtra(CharacterKeys.KEY_TAL_MOB_MAT.name(), curr_char.getTalent_mats().get(3));
 
                 v.getContext().startActivity(intent);
             }
