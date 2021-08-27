@@ -7,15 +7,26 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
+import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private SharedPreferences sp;
+
+    //texts
+    private TextView tvUsername;
+    private TextView tvUid;
+
+    //buttons
     private ImageButton btnViewCharacters;
     private ImageView  imageView;
     private ImageButton btnViewSavedPlans;
@@ -34,6 +45,21 @@ public class HomeActivity extends AppCompatActivity {
         this.btnViewItems = findViewById(R.id.btn_home_vwitems);
         this.btnLogout = findViewById(R.id.btn_home_logout);
 
+        this.sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        initializeTextViews();
+        initializeButtons();
+    }
+
+    private void initializeTextViews() {
+        this.tvUsername = findViewById(R.id.tv_home_name);
+        this.tvUid = findViewById(R.id.tv_home_uid);
+
+        this.tvUsername.setText(sp.getString(UserKeys.USERNAME_KEY.name(), "Error"));
+        this.tvUid.setText(sp.getString(UserKeys.UID_KEY.name(), "Error"));
+
+    }
+
+    private void initializeButtons() {
         this.btnViewCharacters.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, CharacterListActivity.class);
 
@@ -66,7 +92,5 @@ public class HomeActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
-        
     }
-
 }

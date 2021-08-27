@@ -5,7 +5,7 @@
     <string name="full_name">Full Name</string>
     <string name="email_address">Email Address</string>
     <string name="username">Username</string>
-    <string name="genshin_uid">Genshin UID (optional)</string>
+    <string name="genshin_uid">Genshin UID</string>
     <string name="genshin_main"> Genshin Main</string>
     <string name="save_profile">Save Profile</string>
 

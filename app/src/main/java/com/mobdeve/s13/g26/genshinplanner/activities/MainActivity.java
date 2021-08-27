@@ -5,6 +5,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -35,6 +36,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -101,17 +103,42 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void authSuccess(FirebaseUser user) {
-        userdbHelper.getReference().orderByValue().equalTo(user.getEmail()).addValueEventListener(new ValueEventListener() {
+        userdbHelper.getReference().orderByChild("email").equalTo(user.getEmail()).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+            public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
                 Intent intent = null;
+
                 if(snapshot.exists()) {
+                    User user = snapshot.getValue(User.class);
+
+                    //add user data to SharedPreferences
+                    SharedPreferences.Editor spEditor = sp.edit();
+                    spEditor.putString(UserKeys.USERNAME_KEY.name(), user.getUsername());
+                    spEditor.putString(UserKeys.UID_KEY.name(), user.getUid());
+                    spEditor.putString(UserKeys.MAIN_KEY.name(), user.getMain());
+                    spEditor.apply();
+
                     intent = new Intent(MainActivity.this, HomeActivity.class);
                 }
                 else {
                     intent = new Intent(MainActivity.this, RegisterActivity.class);
                 }
                 startActivity(intent);
+            }
+
+            @Override
+            public void onChildChanged(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull @NotNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
+
             }
 
             @Override
