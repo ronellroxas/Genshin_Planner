@@ -83,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
         return  !this.etEmail.getText().toString().isEmpty() &&
                 !this.etName.getText().toString().isEmpty() &&
                 !this.etUsername.getText().toString().isEmpty() &&
+                !this.etUid.getText().toString().isEmpty() &&
                 !this.spinnerMain.getSelectedItem().toString().equalsIgnoreCase("select character");
     }
 
@@ -130,12 +131,22 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User(sp.getString(UserKeys.ID_KEY.name(), null),
                             etEmail.getText().toString(),
                             etName.getText().toString(),
+                            etUsername.getText().toString(),
                             uid,
                             spinnerMain.getSelectedItem().toString());
 
         if(user.getUserId() == null) {
             Toast.makeText(this, "Error creating user.",Toast.LENGTH_SHORT).show();
         }
+
+        //add user to db
         userDBHelper.addUser(user);
+
+        //add user to SharedPreferences
+        SharedPreferences.Editor spEditor = this.sp.edit();
+        spEditor.putString(UserKeys.USERNAME_KEY.name(), user.getUsername());
+        spEditor.putString(UserKeys.UID_KEY.name(), user.getUid());
+        spEditor.putString(UserKeys.MAIN_KEY.name(), user.getMain());
+        spEditor.apply();
     }
 }
