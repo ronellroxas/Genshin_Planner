@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
+import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -20,6 +21,8 @@ public class HomeActivity extends AppCompatActivity {
     private ImageButton btnViewSavedPlans;
     private ImageButton btnCreatePlans;
     private ImageButton btnViewItems;
+    private ImageButton btnLogout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         this.btnViewCharacters = findViewById(R.id.btn_home_vwchar);
         this.btnViewSavedPlans = findViewById(R.id.btn_home_svdplans);
         this.btnViewItems = findViewById(R.id.btn_home_vwitems);
+        this.btnLogout = findViewById(R.id.btn_home_logout);
 
         this.btnViewCharacters.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, CharacterListActivity.class);
@@ -51,6 +55,15 @@ public class HomeActivity extends AppCompatActivity {
         this.btnViewItems.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, ItemListActivity.class);
 
+            startActivity(intent);
+        });
+
+        this.btnLogout.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+            FirebaseUserDBHelper userDBHelper = new FirebaseUserDBHelper();
+            userDBHelper.logout();
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
         });
         
