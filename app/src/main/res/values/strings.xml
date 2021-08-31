@@ -41,4 +41,8 @@
     <string name="sample_item_name">Crystalline Bloom</string>
     <string name="type">Type: Charcter Ascension Material, Weapon Ascension Materials, Talent Ascension Material</string>
     <string name="obtain">How to Obtain:</string>
+
+    <!-- View Plans -->
+    <string name="sample_description">This plan is made for characters such as Raiden Shogun, Sara, Kokomi, Klee, Diluc</string>
+    <string name="resin">Resin: </string>
 </resources>

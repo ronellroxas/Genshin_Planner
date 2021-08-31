@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 public enum PlanKeys {
     PLAN_ID_KEY,
-    PLAN_OWNER_KEY,
+    PLAN_OWNER_NAME,
+    PLAN_OWNER_UID,
     PLAN_TITLE_KEY,
     PLAN_DESCRIPTION_KEY,
     PLAN_RESIN_KEY,
