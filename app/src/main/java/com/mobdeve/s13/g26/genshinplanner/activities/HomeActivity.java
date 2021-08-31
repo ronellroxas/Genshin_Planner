@@ -1,9 +1,5 @@
 package com.mobdeve.s13.g26.genshinplanner.activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,6 +12,7 @@ import android.widget.TextView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
+import com.mobdeve.s13.g26.genshinplanner.utils.AssetsHelper;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
 
 public class HomeActivity extends AppCompatActivity {
@@ -48,6 +45,8 @@ public class HomeActivity extends AppCompatActivity {
         this.sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         initializeTextViews();
         initializeButtons();
+
+        AssetsHelper assetsHelper = new AssetsHelper(HomeActivity.this);
     }
 
     private void initializeTextViews() {

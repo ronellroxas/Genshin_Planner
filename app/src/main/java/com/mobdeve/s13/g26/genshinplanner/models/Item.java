@@ -1,12 +1,25 @@
 package com.mobdeve.s13.g26.genshinplanner.models;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Item {
     private int item_img;
     private String item_name;
     private ArrayList<String> item_types;
     private ArrayList<String> item_obtain_ways;
+
+
+    /**
+     * Temporary constructor for asset testing
+     *
+     */
+    public Item (String item_name, ArrayList<String> item_types,ArrayList<String> item_obtain_ways) {
+        this.item_name = item_name;
+        this.item_types = item_types;
+        this.item_obtain_ways = item_obtain_ways;
+    }
 
     public Item (int item_img, String item_name, ArrayList<String> item_types, ArrayList<String> item_obtain_ways){
         this.item_img = item_img;

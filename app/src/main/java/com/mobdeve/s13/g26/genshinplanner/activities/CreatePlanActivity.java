@@ -1,31 +1,29 @@
 package com.mobdeve.s13.g26.genshinplanner.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
-import com.mobdeve.s13.g26.genshinplanner.adapters.CharacterListAdapter;
-import com.mobdeve.s13.g26.genshinplanner.adapters.CreatePlanAdapter;
+import com.mobdeve.s13.g26.genshinplanner.adapters.CreatePlanRoutesAdapter;
+import com.mobdeve.s13.g26.genshinplanner.models.Item;
 
 import java.util.ArrayList;
 
 public class CreatePlanActivity extends AppCompatActivity {
 
     //RecyclerView cycle variables
-    private CreatePlanAdapter createPlanAdapter;
+    private CreatePlanRoutesAdapter createPlanRoutesAdapter;
     private RecyclerView rvRoutes;
     private ArrayList<String> routes;
+    private ArrayList<Item> items;
 
     //Create Plan components
     private Spinner spinnerAddRoute;
@@ -44,10 +42,11 @@ public class CreatePlanActivity extends AppCompatActivity {
         this.routes = new ArrayList<>();
 
         this.rvRoutes = findViewById(R.id.rv_create_plan_routes);
-        this.createPlanAdapter = new CreatePlanAdapter(routes);
+        this.createPlanRoutesAdapter = new CreatePlanRoutesAdapter(routes);
+
 
         this.rvRoutes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        this.rvRoutes.setAdapter(this.createPlanAdapter);
+        this.rvRoutes.setAdapter(this.createPlanRoutesAdapter);
     }
 
     /**
@@ -71,7 +70,7 @@ public class CreatePlanActivity extends AppCompatActivity {
                 String selected = spinnerAddRoute.getSelectedItem().toString();
                 if(!selected.equals("")) {
                     routes.add(selected);
-                    createPlanAdapter.addRoute();
+                    createPlanRoutesAdapter.addRoute();
                 }
             }
 
