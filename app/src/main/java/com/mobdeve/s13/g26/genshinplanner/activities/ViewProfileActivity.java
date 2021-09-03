@@ -62,7 +62,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         this.tv_email.setText(sp.getString(UserKeys.EMAIL_KEY.name(), null));
     }
 
-    private int getImageResources(String main) {
+    public int getImageResources(String main) {
         Field[] fields = R.drawable.class.getDeclaredFields();
         try {
             for (int i = 0; i < fields.length; i++) {

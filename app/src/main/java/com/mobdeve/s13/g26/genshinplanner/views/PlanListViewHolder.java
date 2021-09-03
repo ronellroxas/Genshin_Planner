@@ -6,6 +6,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -15,7 +16,7 @@ import com.mobdeve.s13.g26.genshinplanner.adapters.ItemListAdapter;
 import org.jetbrains.annotations.NotNull;
 
 public class PlanListViewHolder extends RecyclerView.ViewHolder {
-
+    private ConstraintLayout cl_plan_template;
     private ImageView iv_plan_img;
     private TextView tv_plan_title;
     private TextView tv_plan_creator;
@@ -25,7 +26,7 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
     private RecyclerView rv_data_list_plan;
     public PlanListViewHolder(@NonNull @NotNull View itemView) {
         super(itemView);
-
+        this.cl_plan_template = itemView.findViewById(R.id.cl_plan_template);
         this.iv_plan_img = itemView.findViewById(R.id.iv_list_plan_character);
         this.tv_plan_title = itemView.findViewById(R.id.tv_list_plan_title);
         this.tv_plan_creator = itemView.findViewById(R.id.tv_list_plan_user);
@@ -66,5 +67,9 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
 
     public void setDataListAdapter(ItemListAdapter ila){
         rv_data_list_plan.setAdapter(ila);
+    }
+
+    public void setListeners(View.OnClickListener ocl){
+        cl_plan_template.setOnClickListener(ocl);
     }
 }

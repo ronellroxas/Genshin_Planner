@@ -12,7 +12,7 @@
 
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/tv_plan_resin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Resin: "
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".5" />
+        app:layout_constraintGuide_percent="0.44" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_left_main"
@@ -110,14 +110,14 @@
         android:id="@+id/tv_plan_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="TextView"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/gl_top_user_details"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_middle"
-        app:layout_constraintTop_toTopOf="@+id/gl_top_user_details"
-        android:gravity="center" />
+        app:layout_constraintTop_toTopOf="@+id/gl_top_user_details" />
 
     <TextView
         android:id="@+id/tv_user_username"
@@ -126,8 +126,8 @@
         android:gravity="center"
         android:text="@string/sample_username"
         android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_middle"
         app:layout_constraintTop_toBottomOf="@+id/tv_plan_name" />
 
@@ -137,8 +137,8 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="#FF9401"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_middle"
         app:layout_constraintTop_toBottomOf="@+id/tv_user_username"
         tools:text="@string/sample_UID" />
@@ -157,15 +157,16 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_user_image" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/rb_plan_view_rating"
         style="@android:style/Widget.DeviceDefault.RatingBar.Indicator"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:isIndicator="true"
         android:numStars="5"
         android:stepSize="0.1"
-        tools:layout_editor_absoluteX="206dp"
-        tools:layout_editor_absoluteY="179dp" />
+        app:layout_constraintBottom_toTopOf="@+id/gl_top"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_middle" />
 
     <TextView
         android:id="@+id/textView14"

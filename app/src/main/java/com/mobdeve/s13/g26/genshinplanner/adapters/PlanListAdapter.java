@@ -2,6 +2,7 @@ package com.mobdeve.s13.g26.genshinplanner.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.activities.CreatePlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.PlanListActivity;
+import com.mobdeve.s13.g26.genshinplanner.activities.ViewPlanActivity;
+import com.mobdeve.s13.g26.genshinplanner.activities.ViewProfileActivity;
+import com.mobdeve.s13.g26.genshinplanner.keys.PlanKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
 import com.mobdeve.s13.g26.genshinplanner.views.ItemListViewHolder;
 import com.mobdeve.s13.g26.genshinplanner.views.PlanListViewHolder;
@@ -39,6 +43,24 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View itemView = layoutInflater.inflate(R.layout.data_list_plan, parent, false);
         PlanListViewHolder holder = new PlanListViewHolder(itemView);
+        holder.setListeners(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ViewPlanActivity.class);
+                Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
+                String resin = "Resin: " + curr_plan.getPlan_resin_spent();
+
+                intent.putExtra(PlanKeys.PLAN_IMAGE.name(),getImageResources(curr_plan.getPlan_owner().getMain()));
+                intent.putExtra(PlanKeys.PLAN_TITLE_KEY.name(), curr_plan.getPlan_title());
+                intent.putExtra(PlanKeys.PLAN_OWNER_NAME.name(), curr_plan.getPlan_owner().getUsername());
+                intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), curr_plan.getPlan_owner().getUid());
+                intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), resin);
+                intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), curr_plan.getPlan_description());
+                intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_rating());
+
+                v.getContext().startActivity(intent);
+            }
+        });
         return holder;
     }
 
@@ -57,6 +79,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         holder.setRatingPlan(curr_plan.getPlan_rating());
         holder.setResinPlan("" + curr_plan.getPlan_resin_spent());
         holder.setCreatorPlan(curr_plan.getPlan_owner().getUsername());
+
 
         ItemListAdapter itemListAdapter = new ItemListAdapter(curr_plan.getPlan_items());
         holder.setDataListAdapter(itemListAdapter);
@@ -83,4 +106,5 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
 
         return -1;
     }
+
 }
