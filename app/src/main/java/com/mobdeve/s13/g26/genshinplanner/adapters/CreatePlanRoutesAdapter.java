@@ -18,12 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CreatePlanAdapter extends RecyclerView.Adapter<CreatePlanRoutesViewHolder> {
+public class CreatePlanRoutesAdapter extends RecyclerView.Adapter<CreatePlanRoutesViewHolder> {
 
     private CreatePlanRoutesViewHolder routesViewHolder;
     private ArrayList<String> routes;
 
-    public CreatePlanAdapter(ArrayList<String> routes) {
+    public CreatePlanRoutesAdapter(ArrayList<String> routes) {
         this.routes = routes;
     }
 
