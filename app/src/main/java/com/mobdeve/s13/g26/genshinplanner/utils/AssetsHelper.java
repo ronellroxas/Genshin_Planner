@@ -11,10 +11,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class AssetsHelper {
 
@@ -36,7 +38,8 @@ public class AssetsHelper {
      */
     private JSONArray readJSON(String path) {
         String json = "";
-        try{
+
+        try {
             InputStream iStream = this.manager.open(path);
             int size = iStream.available();
             byte[] buffer = new byte[size];
@@ -45,31 +48,25 @@ public class AssetsHelper {
             json = new String(buffer, "UTF-8");
             json = json.replaceAll("\"source\"", "\"sources\"");
             JSONObject jsonObj = new JSONObject(json);
-            Log.d("OBJ:", jsonObj.toString());
-            JSONArray jsonArray;
+            JSONArray jsonArray = new JSONArray();
 
-            if(jsonObj.has("items"))
-                jsonArray = jsonObj.getJSONArray("items");
-            else
-                do {
-                    JSONArray names = jsonObj.names();
-                    jsonArray = new JSONArray();
+            Iterator<String> keys = jsonObj.keys();
 
-                    for (int i = 0; i < names.length(); i++) {
-                        String name = names.get(i).toString();
-                        jsonArray.put(jsonObj.get(name));
-                    }
-                    jsonObj = jsonArray.getJSONObject(0);
-                } while (jsonArray.getJSONObject(0).isNull("sources"));
+            while (keys.hasNext()) {
+                String key = keys.next();
+                jsonArray.put(jsonObj.get(key));
 
-
+            }
+            //Log.d("jsonArray:", jsonArray.toString());
             return jsonArray;
         }
         catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+
     }
+
 
     public ArrayList<Item> getItemAssets() throws JSONException {
         ArrayList<Item> tempList = new ArrayList<>();
@@ -104,7 +101,7 @@ public class AssetsHelper {
         //get stuff from common-ascension
         types = new String[]{"character ascension material"};
         typesList = new ArrayList<String>(Arrays.asList(types));
-        //tempList.addAll(getMaterialsFromDir(basePath + paths[3], typesList));
+        tempList.addAll(getMaterialsFromDir(basePath + paths[3], typesList));
 
         //get stuff from cooking-ingredients
         types = new String[]{"cooking ingredients"};
@@ -114,17 +111,17 @@ public class AssetsHelper {
         //get stuff from local-specialties
         types = new String[]{"local specialties"};
         typesList = new ArrayList<String>(Arrays.asList(types));
-        //tempList.addAll(getMaterialsFromDir(basePath + paths[5], typesList));
+        tempList.addAll(getMaterialsFromDir(basePath + paths[5], typesList));
 
         //get stuff from talent-books
         types = new String[]{"talent book"};
         typesList = new ArrayList<String>(Arrays.asList(types));
-        //tempList.addAll(getMaterialsFromDir(basePath + paths[6], typesList));
+        tempList.addAll(getMaterialsFromDir(basePath + paths[6], typesList));
 
         //get stuff from talent-boss
         types = new String[]{"talent material"};
         typesList = new ArrayList<String>(Arrays.asList(types));
-        //tempList.addAll(getMaterialsFromDir(basePath + paths[7], typesList));
+        tempList.addAll(getMaterialsFromDir(basePath + paths[7], typesList));
 
 
         for(Item item: tempList) {
@@ -143,27 +140,55 @@ public class AssetsHelper {
      */
     private ArrayList<Item> getMaterialsFromDir(String basePath, ArrayList<String> typesList) throws JSONException {
         ArrayList<Item> tempList = new ArrayList<>();
-        JSONArray bossMaterial = readJSON(basePath + "/en.json");
+        JSONArray material = readJSON(basePath + "/en.json");
 
-        for(int i = 0; i < bossMaterial.length(); i++) { //save to temp array
-            JSONObject item = bossMaterial.getJSONObject(i);
+        if(material.get(0) instanceof JSONArray)
+            material = (JSONArray) material.get(0);
+        for(int i = 0; i < material.length(); i++) { //save to temp array
+            JSONObject item = material.getJSONObject(i);
+            Iterator<String> keys = item.keys();
 
             //get item sources
-
+            String name = null;
             String obtainString = null;
             String[] obtains = null;
             ArrayList<String> obtainList = null;
 
-            if(item.has("sources")) {
-                obtainString = item.get("sources").toString();
-                obtains = obtainString.split(",");
-                obtainList = new ArrayList<String>(Arrays.asList(obtains));
+            while (keys.hasNext()) {
+                String key = keys.next();
+                if(key.equalsIgnoreCase("name"))
+                    name = item.getString("name");
+                else if(key.equalsIgnoreCase("sources")) {
+                    obtainString = item.get("sources").toString();
+                    obtains = obtainString.split(",");
+                    obtainList = new ArrayList<String>(Arrays.asList(obtains));
+                }
+                else if(item.get(key) instanceof JSONArray) {
+                    JSONArray array = (JSONArray) item.get(key);
+                    if(array.get(0) instanceof JSONObject) {
+                        JSONObject object = (JSONObject) array.get(0);
+                        Iterator<String> innerKeys = object.keys();
+                        while (innerKeys.hasNext()) {
+                            key = innerKeys.next();
+                            if (key.equalsIgnoreCase("name"))
+                                name = object.getString("name");
+                            if (key.equalsIgnoreCase("sources")) {
+                                obtainString = object.get("sources").toString();
+                                obtains = obtainString.split(",");
+                                obtainList = new ArrayList<String>(Arrays.asList(obtains));
+                            }
+                        }
+                    }
+                }
+                if(name != null && obtainList != null)
+                    continue;
             }
 
             //save to list
-            tempList.add(new Item(item.get("name").toString(), typesList, obtainList));
+            tempList.add(new Item(name, typesList, obtainList));
         }
 
         return tempList;
     }
+
 }
