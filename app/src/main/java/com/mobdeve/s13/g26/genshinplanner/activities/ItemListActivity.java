@@ -5,13 +5,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
-import com.mobdeve.s13.g26.genshinplanner.adapters.CharacterListAdapter;
 import com.mobdeve.s13.g26.genshinplanner.adapters.ItemListAdapter;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
 
 import android.os.Bundle;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class ItemListActivity extends AppCompatActivity {
@@ -51,7 +49,7 @@ public class ItemListActivity extends AppCompatActivity {
         famed_obtain.add("Forged through 3 Kageuchi Handguard");
         famed_obtain.add("Buying through Paimon's Bargan");
 
-        itemList.add(new Item(R.drawable.item_mob_famed_handguard, "Famed Handguard", famed_type, famed_obtain));
+        itemList.add(new Item(R.drawable.item_common_ascension_famed_handguard, "Famed Handguard", famed_type, famed_obtain));
 
         ArrayList<String> hoarfrost_type = new ArrayList<>();
         ArrayList<String> hoarfrost_obtain = new ArrayList<>();
@@ -60,7 +58,7 @@ public class ItemListActivity extends AppCompatActivity {
 
         hoarfrost_obtain.add("Dropped by Level 40 Cryo Regisvine");
 
-        itemList.add(new Item(R.drawable.item_char_ascen_hoarfrost_core, "Hoarforst Core", hoarfrost_type, hoarfrost_obtain));
+        itemList.add(new Item(R.drawable.item_boss_material_hoarfrost_core, "Hoarforst Core", hoarfrost_type, hoarfrost_obtain));
     }
 
 //    private void getImageResources() {

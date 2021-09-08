@@ -17,5 +17,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/item_char_ascen_anemo_chunk" />
+        app:srcCompat="@drawable/item_character_ascension_vayuda_turquoise_chunk" />
 </androidx.constraintlayout.widget.ConstraintLayout>

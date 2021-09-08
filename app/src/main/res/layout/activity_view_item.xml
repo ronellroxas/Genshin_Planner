@@ -83,7 +83,7 @@
         app:layout_constraintEnd_toStartOf="@+id/gl_right_char_pic"
         app:layout_constraintStart_toStartOf="@+id/gl_left_char_pic"
         app:layout_constraintTop_toTopOf="@+id/gl_top_main"
-        app:srcCompat="@drawable/item_char_ascen_crystalline_bloom" />
+        app:srcCompat="@drawable/item_boss_material_crystalline_bloom" />
 
     <TextView
         android:id="@+id/tv_view_item_name"

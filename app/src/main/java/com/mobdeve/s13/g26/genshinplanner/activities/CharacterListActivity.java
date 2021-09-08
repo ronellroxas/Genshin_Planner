@@ -11,7 +11,6 @@ import com.mobdeve.s13.g26.genshinplanner.adapters.CharacterListAdapter;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.models.Character;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class CharacterListActivity extends AppCompatActivity {
@@ -25,7 +24,7 @@ public class CharacterListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_list);
-        charList = new ArrayList<Character>();
+        charList = new ArrayList<>();
         initRecyclerAdapter();
     }
 
@@ -41,43 +40,43 @@ public class CharacterListActivity extends AppCompatActivity {
 
     private void loadData(){
         ArrayList<Integer> ascen_mats = new ArrayList<>();
-        ascen_mats.add(R.drawable.item_char_ascen_cryo_gemstone);
-        ascen_mats.add(R.drawable.item_char_ascen_perpetual_heart);
-        ascen_mats.add(R.drawable.item_world_sakura_bloom);
-        ascen_mats.add(R.drawable.item_mob_famed_handguard);
+        ascen_mats.add(R.drawable.item_character_ascension_shivada_jade__gemstone);
+        ascen_mats.add(R.drawable.item_boss_material_perpetual_heart);
+        ascen_mats.add(R.drawable.item_local_specialties_sakura_bloom);
+        ascen_mats.add(R.drawable.item_common_ascension_famed_handguard);
 
         ArrayList<Integer> talent_mats = new ArrayList<>();
-        talent_mats.add(R.drawable.item_tal_philo_elegance);
-        talent_mats.add(R.drawable.item_week_frog_branch);
+        talent_mats.add(R.drawable.item_talent_book_philosophies_of_elegance);
+        talent_mats.add(R.drawable.item_talent_boss_bloodjade_branch);
         talent_mats.add(R.drawable.item_tal_crown);
-        talent_mats.add(R.drawable.item_mob_famed_handguard);
+        talent_mats.add(R.drawable.item_common_ascension_famed_handguard);
 
         charList.add(new Character(R.drawable.characters_ayaka, "Kamisato Ayaka", 2, 6, 5, ascen_mats, talent_mats));
         ascen_mats.clear();
         talent_mats.clear();
 
-        ascen_mats.add(R.drawable.item_char_ascen_pyro_gemstone);
-        ascen_mats.add(R.drawable.item_char_ascen_everflame_seed);
-        ascen_mats.add(R.drawable.item_world_lamp_grass);
-        ascen_mats.add(R.drawable.item_mob_weathered_arrow);
+        ascen_mats.add(R.drawable.item_character_ascension_agnidus_agate_gemstone);
+        ascen_mats.add(R.drawable.item_boss_material_everflame_seed);
+        ascen_mats.add(R.drawable.item_local_specialties_small_lamp_grass);
+        ascen_mats.add(R.drawable.item_common_ascension_weathered_arrow);
 
-        talent_mats.add(R.drawable.item_tal_philo_freedom);
-        talent_mats.add(R.drawable.item_week_dragon_sigh);
+        talent_mats.add(R.drawable.item_talent_book_philosophies_of_freedom);
+        talent_mats.add(R.drawable.item_talent_boss_dvalins_sigh);
         talent_mats.add(R.drawable.item_tal_crown);
-        talent_mats.add(R.drawable.item_mob_weathered_arrow);
+        talent_mats.add(R.drawable.item_common_ascension_weathered_arrow);
         charList.add(new Character(R.drawable.characters_amber, "Amber", 4, 2, 4, ascen_mats, talent_mats));
         ascen_mats.clear();
         talent_mats.clear();
 
-        ascen_mats.add(R.drawable.item_char_ascen_pyro_gemstone);
-        ascen_mats.add(R.drawable.item_char_ascen_everflame_seed);
-        ascen_mats.add(R.drawable.item_world_philanemo_mushroom);
-        ascen_mats.add(R.drawable.item_mob_forbidden_curse_scroll);
+        ascen_mats.add(R.drawable.item_character_ascension_agnidus_agate_gemstone);
+        ascen_mats.add(R.drawable.item_boss_material_everflame_seed);
+        ascen_mats.add(R.drawable.item_local_specialties_philanemo_mushroom);
+        ascen_mats.add(R.drawable.item_common_ascension_forbidden_curse_scroll);
 
-        talent_mats.add(R.drawable.item_tal_philo_freedom);
-        talent_mats.add(R.drawable.item_week_wolf_ring);
+        talent_mats.add(R.drawable.item_talent_book_philosophies_of_freedom);
+        talent_mats.add(R.drawable.item_talent_boss_ring_of_boreas);
         talent_mats.add(R.drawable.item_tal_crown);
-        talent_mats.add(R.drawable.item_mob_forbidden_curse_scroll);
+        talent_mats.add(R.drawable.item_common_ascension_forbidden_curse_scroll);
         charList.add(new Character(R.drawable.characters_klee, "Klee", 5, 2, 5, ascen_mats, talent_mats));
 
     }

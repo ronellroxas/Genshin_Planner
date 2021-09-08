@@ -60,7 +60,7 @@ public class PlanListActivity extends AppCompatActivity {
         famed_obtain.add("Forged through 3 Kageuchi Handguard");
         famed_obtain.add("Buying through Paimon's Bargan");
 
-        itemList.add(new Item(R.drawable.item_mob_famed_handguard, "Famed Handguard", famed_type, famed_obtain));
+        itemList.add(new Item(R.drawable.item_common_ascension_famed_handguard, "Famed Handguard", famed_type, famed_obtain));
 
         ArrayList<String> hoarfrost_type = new ArrayList<>();
         ArrayList<String> hoarfrost_obtain = new ArrayList<>();
@@ -69,7 +69,7 @@ public class PlanListActivity extends AppCompatActivity {
 
         hoarfrost_obtain.add("Dropped by Level 40 Cryo Regisvine");
 
-        itemList.add(new Item(R.drawable.item_char_ascen_hoarfrost_core, "Hoarforst Core", hoarfrost_type, hoarfrost_obtain));
+        itemList.add(new Item(R.drawable.item_boss_material_hoarfrost_core, "Hoarforst Core", hoarfrost_type, hoarfrost_obtain));
 
         ArrayList<String> route = new ArrayList<>();
         route.add("Bahay ni Howard");
