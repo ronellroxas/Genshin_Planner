@@ -46,7 +46,7 @@ public class CharacterListActivity extends AppCompatActivity {
         ascen_mats.add(R.drawable.item_common_ascension_famed_handguard);
 
         ArrayList<Integer> talent_mats = new ArrayList<>();
-        talent_mats.add(R.drawable.item_talent_book_philosophies_of_elegance);
+        talent_mats.add(R.drawable.item_talent_book_teachings_of_elegance);
         talent_mats.add(R.drawable.item_talent_boss_bloodjade_branch);
         talent_mats.add(R.drawable.item_tal_crown);
         talent_mats.add(R.drawable.item_common_ascension_famed_handguard);
@@ -60,7 +60,7 @@ public class CharacterListActivity extends AppCompatActivity {
         ascen_mats.add(R.drawable.item_local_specialties_small_lamp_grass);
         ascen_mats.add(R.drawable.item_common_ascension_weathered_arrow);
 
-        talent_mats.add(R.drawable.item_talent_book_philosophies_of_freedom);
+        talent_mats.add(R.drawable.item_talent_book_teachings_of_freedom);
         talent_mats.add(R.drawable.item_talent_boss_dvalins_sigh);
         talent_mats.add(R.drawable.item_tal_crown);
         talent_mats.add(R.drawable.item_common_ascension_weathered_arrow);
@@ -73,7 +73,7 @@ public class CharacterListActivity extends AppCompatActivity {
         ascen_mats.add(R.drawable.item_local_specialties_philanemo_mushroom);
         ascen_mats.add(R.drawable.item_common_ascension_forbidden_curse_scroll);
 
-        talent_mats.add(R.drawable.item_talent_book_philosophies_of_freedom);
+        talent_mats.add(R.drawable.item_talent_book_teachings_of_freedom);
         talent_mats.add(R.drawable.item_talent_boss_ring_of_boreas);
         talent_mats.add(R.drawable.item_tal_crown);
         talent_mats.add(R.drawable.item_common_ascension_forbidden_curse_scroll);

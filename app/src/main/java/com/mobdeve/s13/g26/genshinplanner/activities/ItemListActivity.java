@@ -10,6 +10,7 @@ import com.mobdeve.s13.g26.genshinplanner.models.Item;
 import com.mobdeve.s13.g26.genshinplanner.utils.AssetsHelper;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -41,7 +42,6 @@ public class ItemListActivity extends AppCompatActivity {
 
     private void loadData(){
         AssetsHelper assetsHelper = new AssetsHelper(ItemListActivity.this);
-
         try {
             this.itemList = assetsHelper.getItemAssets();
         }

@@ -56,6 +56,9 @@ public class ViewPlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_plan);
 
+        this.item_list = new ArrayList<>();
+        this.route_list = new ArrayList<>();
+
         this.iv_user_image = findViewById(R.id.iv_user_image);
         this.tv_plan_name = findViewById(R.id.tv_plan_name);
         this.tv_plan_username = findViewById(R.id.tv_user_username);
