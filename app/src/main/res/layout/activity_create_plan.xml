@@ -195,7 +195,9 @@
         android:backgroundTint="#FF9401"
         app:layout_constraintBottom_toBottomOf="@+id/textView5"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/textView5"
+        android:spinnerMode="dialog"
+        />
 
     <Spinner
         android:id="@+id/spinner_create_plan_routes"
@@ -205,6 +207,8 @@
         android:backgroundTint="#FF9401"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        android:spinnerMode="dialog"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,29 +5,41 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
+import com.mobdeve.s13.g26.genshinplanner.adapters.CreatePlanItemsAdapter;
 import com.mobdeve.s13.g26.genshinplanner.adapters.CreatePlanRoutesAdapter;
+import com.mobdeve.s13.g26.genshinplanner.adapters.CustomSpinnerImageAdapter;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
+import com.mobdeve.s13.g26.genshinplanner.utils.AssetsHelper;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CreatePlanActivity extends AppCompatActivity {
 
     //RecyclerView cycle variables
     private CreatePlanRoutesAdapter createPlanRoutesAdapter;
+    private CreatePlanItemsAdapter createPlanItemsAdapter;
     private RecyclerView rvRoutes;
+    private RecyclerView rvItems;
     private ArrayList<String> routes;
     private ArrayList<Item> items;
 
     //Create Plan components
     private Spinner spinnerAddRoute;
     private Spinner spinnerAddItem;
+    private Button btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +48,29 @@ public class CreatePlanActivity extends AppCompatActivity {
 
         initRecyclerAdapter();
         initRouteSpinner();
+        try {
+            initItemsSpinner();
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initRecyclerAdapter() {
         this.routes = new ArrayList<>();
+        this.items = new ArrayList<>();
 
         this.rvRoutes = findViewById(R.id.rv_create_plan_routes);
-        this.createPlanRoutesAdapter = new CreatePlanRoutesAdapter(routes);
+        this.rvItems = findViewById(R.id.rv_create_plan_items);
 
+        this.createPlanRoutesAdapter = new CreatePlanRoutesAdapter(routes);
+        this.createPlanItemsAdapter = new CreatePlanItemsAdapter(items);
 
         this.rvRoutes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         this.rvRoutes.setAdapter(this.createPlanRoutesAdapter);
+
+        this.rvItems.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        this.rvItems.setAdapter(this.createPlanItemsAdapter);
     }
 
     /**
@@ -79,6 +103,48 @@ public class CreatePlanActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+
+    private void initItemsSpinner() throws JSONException {
+        this.spinnerAddItem = findViewById(R.id.spinner_create_plan_items);
+
+        AssetsHelper assetsHelper = new AssetsHelper(CreatePlanActivity.this);
+        ArrayList<Item> tempItemList = assetsHelper.getItemAssets();
+
+        //get image ids
+        Integer[] imageIds = new Integer[tempItemList.size()];
+        //imageIds[0] = -1;
+        for(int i = 0; i < tempItemList.size(); i++) {
+            imageIds[i] = tempItemList.get(i).getItem_img();
+        }
+
+        CustomSpinnerImageAdapter adapter = new CustomSpinnerImageAdapter(this, imageIds);
+        this.spinnerAddItem.setAdapter(adapter);
+
+        //attach listener
+        this.spinnerAddItem.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            Boolean start = true;
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (!start){
+                    ImageView ivView = (ImageView) view;
+                    ivView.setVisibility(View.GONE);
+
+
+                    int selected = spinnerAddItem.getSelectedItemPosition();
+                    if (selected != -1) {
+                        items.add(tempItemList.get(selected));
+                        createPlanItemsAdapter.addItem();
+                    }
+                }
+                start = false;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
