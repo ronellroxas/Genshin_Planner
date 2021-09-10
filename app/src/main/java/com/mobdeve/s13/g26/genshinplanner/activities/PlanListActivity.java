@@ -75,7 +75,7 @@ public class PlanListActivity extends AppCompatActivity {
         route.add("Bahay ni Howard");
         route.add("Bahay ni A.");
         planArrayList = new ArrayList<>();
-        planArrayList.add(new Plan(1, new User("LMAO", "howard_malakas@malakas.com", "Howard Malakas", "HowardMalakas", "09683948232", "Ganyu"),
+        planArrayList.add(new Plan(new User("LMAO", "howard_malakas@malakas.com", "Howard Malakas", "HowardMalakas", "09683948232", "Ganyu"),
                     "Howard Lang Malakas", "Pinakamalakas si Howard", itemList, route, 69, 2));
     }
 }

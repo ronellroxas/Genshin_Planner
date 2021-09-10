@@ -3,7 +3,7 @@ package com.mobdeve.s13.g26.genshinplanner.models;
 import java.util.ArrayList;
 
 public class Plan {
-    private int plan_id;
+    private String plan_id;
     private User plan_owner;
     private String plan_title;
     private String plan_description;
@@ -12,8 +12,8 @@ public class Plan {
     private int plan_resin_spent;
     private int plan_rating;
 
-    public Plan(int plan_id, User plan_owner, String plan_title, String plan_description, ArrayList<Item> plan_items, ArrayList<String> plan_route, int plan_resin_spent, int plan_rating){
-        this.plan_id = plan_id;
+    public Plan(User plan_owner, String plan_title, String plan_description, ArrayList<Item> plan_items, ArrayList<String> plan_route, int plan_resin_spent, int plan_rating){
+        //this.plan_id = plan_id;
         this.plan_owner = plan_owner;
         this.plan_title = plan_title;
         this.plan_description = plan_description;
@@ -23,7 +23,7 @@ public class Plan {
         this.plan_rating = plan_rating;
     }
 
-    public int getPlan_id() {
+    public String getPlan_id() {
         return plan_id;
     }
 
@@ -55,7 +55,7 @@ public class Plan {
         return plan_rating;
     }
 
-    public void setPlan_id(int plan_id) {
+    public void setPlan_id(String plan_id) {
         this.plan_id = plan_id;
     }
 
