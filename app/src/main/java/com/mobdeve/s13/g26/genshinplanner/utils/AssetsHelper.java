@@ -2,9 +2,11 @@ package com.mobdeve.s13.g26.genshinplanner.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.util.Log;
 
 
+import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
 
 import org.json.JSONArray;
@@ -20,15 +22,12 @@ import java.util.Iterator;
 
 public class AssetsHelper {
 
+    private Context context;
     private AssetManager manager;
 
     public AssetsHelper(Context cx) {
         this.manager = cx.getAssets();
-        try {
-            getItemAssets();
-        }catch (JSONException e) {
-            e.printStackTrace();
-        }
+        this.context = cx;
     }
 
     /**
@@ -89,24 +88,15 @@ public class AssetsHelper {
         tempList.addAll(getMaterialsFromDir(basePath + paths[0], typesList));
 
         //get stuff from character-ascension
-        types = new String[]{"character ascension material"};
+        types = new String[]{"character ascension"};
         typesList = new ArrayList<String>(Arrays.asList(types));
         tempList.addAll(getMaterialsFromDir(basePath + paths[1], typesList));
 
-        //get stuff from character-experience
-        types = new String[]{"character experience material"};
-        typesList = new ArrayList<String>(Arrays.asList(types));
-        tempList.addAll(getMaterialsFromDir(basePath + paths[2], typesList));
 
         //get stuff from common-ascension
-        types = new String[]{"character ascension material"};
+        types = new String[]{"common ascension"};
         typesList = new ArrayList<String>(Arrays.asList(types));
         tempList.addAll(getMaterialsFromDir(basePath + paths[3], typesList));
-
-        //get stuff from cooking-ingredients
-        types = new String[]{"cooking ingredients"};
-        typesList = new ArrayList<String>(Arrays.asList(types));
-        tempList.addAll(getMaterialsFromDir(basePath + paths[4], typesList));
 
         //get stuff from local-specialties
         types = new String[]{"local specialties"};
@@ -119,7 +109,7 @@ public class AssetsHelper {
         tempList.addAll(getMaterialsFromDir(basePath + paths[6], typesList));
 
         //get stuff from talent-boss
-        types = new String[]{"talent material"};
+        types = new String[]{"talent boss"};
         typesList = new ArrayList<String>(Arrays.asList(types));
         tempList.addAll(getMaterialsFromDir(basePath + paths[7], typesList));
 
@@ -128,7 +118,7 @@ public class AssetsHelper {
             String obtains = null;
             if(item.getItem_obtain_ways() != null)
                 obtains = Arrays.toString(item.getItem_obtain_ways().toArray());
-            Log.d("TEMPLIST " + item.getItem_name() + ": ", Arrays.toString(item.getItem_types().toArray()) + "\n" + obtains);
+            //Log.d("TEMPLIST " + item.getItem_name() + ": ", Arrays.toString(item.getItem_types().toArray()) + "\n" + obtains);
         }
 
         return tempList;
@@ -184,11 +174,27 @@ public class AssetsHelper {
                     continue;
             }
 
-            //save to list
-            tempList.add(new Item(name, typesList, obtainList));
+            if(name != null) {
+                String filename = "item_" + typesList.get(0).replace(" ", "_") +
+                        "_" + name.toLowerCase().replace(" ", "_");
+                filename = filename.replace("'", "");
+
+                int image = getDrawableResource(filename);
+
+                if(image > 0)   //images with 0 are tier 1 versions of some items we won't use
+                    //save to list
+                    tempList.add(new Item(image, name, typesList, obtainList));
+            }
         }
 
         return tempList;
+    }
+
+    private int getDrawableResource(String name) {
+        Resources resources = context.getResources();
+        final int resourceId = resources.getIdentifier(name, "drawable",
+                context.getPackageName());
+        return resourceId;
     }
 
 }
