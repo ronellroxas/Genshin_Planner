@@ -2,27 +2,32 @@
   "tail-of-boreas": {
     "id": "tail-of-boreas",
     "name": "Tail of Boreas",
-    "characters": ["qiqi", "venti", "xingqiu", "traveler-geo"]
+    "characters": ["qiqi", "venti", "xingqiu", "traveler-geo"],
+    "sources": "Andrius, Lupus Boreas"
   },
   "ring-of-boreas": {
     "id": "ring-of-boreas",
     "name": "Ring of Boreas",
-    "characters": ["barbara", "keqing", "klee", "mona"]
+    "characters": ["barbara", "keqing", "klee", "mona"],
+    "sources": "Andrius, Lupus Boreas"
   },
   "spirit-locket-of-boreas": {
     "id": "spirit-locket-of-boreas",
     "name": "Spirit Locket of Boreas",
-    "characters": ["fischl", "kaeya", "ningguang", "sucrose"]
+    "characters": ["fischl", "kaeya", "ningguang", "sucrose"],
+    "sources": "Andrius"
   },
   "dvalin's-plume": {
     "id": "dvalin's-plume",
     "name": "Dvalin's Plume",
-    "characters": ["bennett", "diluc", "jean"]
+    "characters": ["bennett", "diluc", "jean"],
+    "sources": "Dvalin's Domain"
   },
   "dvalin's-claw": {
     "id": "dvalin's-claw",
     "name": "Dvalin's Claw",
-    "characters": ["lisa", "noelle", "razor", "xiangling"]
+    "characters": ["lisa", "noelle", "razor", "xiangling"],
+    "sources": "Dvalin's Domain"
   },
   "dvalin's-sigh": {
     "id": "dvalin's-sigh",
@@ -33,21 +38,25 @@
       "chongyun",
       "traveler-anemo",
       "traveler-geo"
-    ]
+    ],
+    "sources": "Dvalin's Domain"
   },
   "tusk-of-monoceros-caeli": {
     "id": "tusk-of-monoceros-caeli",
     "name": "Tusk of Monoceros Caeli",
-    "characters": ["albedo", "xinyan", "zhongli"]
+    "characters": ["albedo", "xinyan", "zhongli"],
+    "sources": "Childe Domain"
   },
   "shard-of-a-foul-legacy": {
     "id": "shard-of-a-foul-legacy",
     "name": "Shard of a Foul Legacy",
-    "characters": ["diona", "hu-tao", "tartaglia"]
+    "characters": ["diona", "hu-tao", "tartaglia"],
+    "sources": "Childe Domain"
   },
   "shadow-of-the-warrior": {
     "id": "shadow-of-the-warrior",
     "name": "Shadow of the Warrior",
-    "characters": ["ganyu", "rosaria", "xiao"]
+    "characters": ["ganyu", "rosaria", "xiao"],
+    "sources": "Childe Domain"
   }
 }

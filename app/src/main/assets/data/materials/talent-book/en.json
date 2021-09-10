@@ -11,7 +11,7 @@
       "traveler-geo"
     ],
     "availability": ["Monday", "Thursday", "Sunday"],
-    "source": "forsaken-rift",
+    "sources": "Forsaken Rift",
     "items": [
       {
         "id": "teachings-of-freedom",
@@ -42,7 +42,7 @@
       "traveler-geo"
     ],
     "availability": ["Tuesday", "Friday", "Sunday"],
-    "source": "forsaken-rift",
+    "sources": "Forsaken Rift",
     "items": [
       {
         "id": "teachings-of-resistance",
@@ -73,7 +73,7 @@
       "traveler-geo"
     ],
     "availability": ["Wednesday", "Saturday", "Sunday"],
-    "source": "forsaken-rift",
+    "sources": "Forsaken Rift",
     "items": [
       {
         "id": "teachings-of-ballad",
@@ -95,7 +95,7 @@
   "prosperity": {
     "characters": ["keqing", "ningguang", "qiqi", "xiao", "traveler-geo"],
     "availability": ["Monday", "Thursday", "Sunday"],
-    "source": "taishan-mansion",
+    "sources": "Taishan Mansion",
     "items": [
       {
         "id": "teachings-of-prosperity",
@@ -117,7 +117,7 @@
   "diligence": {
     "characters": ["chongyun", "ganyu", "hu-tao", "xiangling", "traveler-geo"],
     "availability": ["Tuesday", "Friday", "Sunday"],
-    "source": "taishan-mansion",
+    "sources": "Taishan Mansion",
     "items": [
       {
         "id": "teachings-of-diligence",
@@ -139,7 +139,7 @@
   "gold": {
     "characters": ["beidou", "xingqiu", "xinyan", "zhongli", "traveler-geo"],
     "availability": ["Wednesday", "Saturday", "Sunday"],
-    "source": "taishan-mansion",
+    "sources": "Taishan Mansion",
     "items": [
       {
         "id": "teachings-of-gold",

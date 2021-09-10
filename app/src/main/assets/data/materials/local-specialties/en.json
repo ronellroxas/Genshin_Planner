@@ -3,84 +3,98 @@
     {
       "id": "calla-lily",
       "name": "Calla Lily",
-      "characters": ["diona", "kaeya"]
+      "characters": ["diona", "kaeya"],
+      "sources": "Found in the Wild, Found in Springvale"
     },
     {
       "id": "cecilia",
       "name": "Cecilia",
-      "characters": ["albedo", "venti"]
+      "characters": ["albedo", "venti"],
+      "sources": "Found in the Wild, Found in Starsnatch Cliff"
     },
     {
       "id": "dandelion-seed",
       "name": "Dandelion Seed",
-      "characters": ["jean"]
+      "characters": ["jean"],
+      "sources": "Found in the Wild, Found in Mondstat Gate"
     },
     {
       "id": "philanemo-mushroom",
       "name": "Philanemo Mushroom",
-      "characters": ["barbara", "klee", "mona"]
+      "characters": ["barbara", "klee", "mona"],
+      "sources": "Found under the eaves of houses"
     },
     {
       "id": "small-lamp-grass",
       "name": "Small Lamp Grass",
-      "characters": ["amber", "diluc", "fischl"]
+      "characters": ["amber", "diluc", "fischl"],
+      "sources": "Found in the wild at night, Found in Wolvendom, Found in Whispering Wood"
     },
     {
       "id": "valberry",
       "name": "Valberry",
-      "characters": ["lisa", "noelle"]
+      "characters": ["lisa", "noelle"],
+      "sources": "Found in the wild at night,Found in Stormbearer Mountains"
     },
     {
       "id": "windwheel-aster",
       "name": "Windwheel Aster",
-      "characters": ["bennett", "sucrose", "traveler-anemo", "traveler-geo"]
+      "characters": ["bennett", "sucrose", "traveler-anemo", "traveler-geo"],
+      "sources": "Found near the windrise Statue of the Seven, Under trees in the open field,Found in Stormterror's Lair"
     },
     {
       "id": "wolfhook",
       "name": "Wolfhook",
-      "characters": ["razor"]
-    }
-  ],
-  "liyue": [
+      "characters": ["razor"],
+      "sources": "Found near the wild, Found in Wolvendom"
+    },
     {
       "id": "cor-lapis",
       "name": "Cor Lapis",
-      "characters": ["chongyun", "keqing", "zhongli"]
+      "characters": ["chongyun", "keqing", "zhongli"],
+      "sources": "Found under cliffs in Liyue, Found in Mt. Hulao"
     },
     {
       "id": "glaze-lily",
       "name": "Glaze Lily",
-      "characters": ["ningguang"]
+      "characters": ["ningguang"],
+      "sources": "Found in the wild, Found in Yujin Terrace, Found in Liyue Harbor, Found in Qingce Village"
     },
     {
       "id": "jueyun-chili",
       "name": "Jueyun Chili",
-      "characters": ["xiangling"]
+      "characters": ["xiangling"],
+      "sources": "Found in the wild, Found in Qingce Village"
     },
     {
       "id": "noctilucous-jade",
       "name": "Noctilucous Jade",
-      "characters": ["beidou"]
+      "characters": ["beidou"],
+      "sources": "Found in caves in Liyue, Found in Mingyun Village"
     },
     {
       "id": "qingxin",
       "name": "Qingxin",
-      "characters": ["ganyu", "xiao"]
+      "characters": ["ganyu", "xiao"],
+      "sources": "Found in the heights of stone forests, Found in Jueyun Karst, Found in Guyun Stone Forest"
     },
     {
       "id": "silk-flower",
       "name": "Silk Flower",
-      "characters": ["xingqiu"]
+      "characters": ["xingqiu"],
+      "sources": "Found near Yujin Terrace, Found near Liyue Harbor, Found near Wangshu Inn"
     },
     {
       "id": "starconch",
       "name": "Starconch",
-      "characters": ["tartaglia"]
+      "characters": ["tartaglia"],
+      "sources": "Found on the beaches of Liyue"
     },
     {
       "id": "violetgrass",
       "name": "Violetgrass",
-      "characters": ["qiqi", "xinyan"]
+      "characters": ["qiqi", "xinyan"],
+      "sources": "Found on the beaches of Liyue"
     }
   ]
 }
