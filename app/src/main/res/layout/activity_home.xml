@@ -20,7 +20,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/tv_midline"
-        app:srcCompat="@drawable/shape_home_button" />
+        app:srcCompat="@drawable/icon_search_plans" />
 
     <ImageButton
         android:id="@+id/btn_home_svdplans"
@@ -32,7 +32,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/tv_midline"
-        app:srcCompat="@drawable/shape_home_button" />
+        app:srcCompat="@drawable/icon_maps" />
 
     <ImageButton
         android:id="@+id/btn_home_vwchar"
@@ -45,7 +45,7 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/tv_button"
-        app:srcCompat="@drawable/shape_home_button" />
+        app:srcCompat="@drawable/icon_characters" />
 
     <ImageButton
         android:id="@+id/btn_home_vwprof"
@@ -58,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.403"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/tv_button3"
-        app:srcCompat="@drawable/shape_home_button" />
+        app:srcCompat="@drawable/icon_profile" />
 
     <ImageButton
         android:id="@+id/btn_home_vwitems"
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/tv_button2"
-        app:srcCompat="@drawable/shape_home_button" />
+        app:srcCompat="@drawable/icon_items" />
 
     <ImageButton
         android:id="@+id/btn_home_logout"
@@ -82,7 +82,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toBottomOf="@+id/tv_button4"
-        app:srcCompat="@drawable/shape_home_button" />
+        app:srcCompat="@drawable/icon_logout" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
