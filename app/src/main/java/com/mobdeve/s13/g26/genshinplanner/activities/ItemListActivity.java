@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.ItemListAdapter;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
+import com.mobdeve.s13.g26.genshinplanner.utils.AssetsHelper;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -38,27 +40,15 @@ public class ItemListActivity extends AppCompatActivity {
     }
 
     private void loadData(){
-        ArrayList<String> famed_type = new ArrayList<>();
-        ArrayList<String> famed_obtain = new ArrayList<>();
+        AssetsHelper assetsHelper = new AssetsHelper(ItemListActivity.this);
 
-        famed_type.add("Character Ascension Material");
-        famed_type.add("Weapon Ascension Material");
-        famed_type.add("Talent Ascension Material");
-
-        famed_obtain.add("Dropped by Level 60 Nobushi");
-        famed_obtain.add("Forged through 3 Kageuchi Handguard");
-        famed_obtain.add("Buying through Paimon's Bargan");
-
-        itemList.add(new Item(R.drawable.item_common_ascension_famed_handguard, "Famed Handguard", famed_type, famed_obtain));
-
-        ArrayList<String> hoarfrost_type = new ArrayList<>();
-        ArrayList<String> hoarfrost_obtain = new ArrayList<>();
-
-        hoarfrost_type.add("Character Ascension Material");
-
-        hoarfrost_obtain.add("Dropped by Level 40 Cryo Regisvine");
-
-        itemList.add(new Item(R.drawable.item_boss_material_hoarfrost_core, "Hoarforst Core", hoarfrost_type, hoarfrost_obtain));
+        try {
+            this.itemList = assetsHelper.getItemAssets();
+        }
+        catch (Exception e) {
+            Toast.makeText(ItemListActivity.this, "Failed to load Items", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 
 //    private void getImageResources() {
