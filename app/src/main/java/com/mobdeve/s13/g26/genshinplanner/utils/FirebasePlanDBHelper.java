@@ -1,25 +1,17 @@
 package com.mobdeve.s13.g26.genshinplanner.utils;
 
-import android.renderscript.Sampler;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
-import com.mobdeve.s13.g26.genshinplanner.models.User;
+
 
 import org.jetbrains.annotations.NotNull;
 
 public class FirebasePlanDBHelper {
 
     private DatabaseReference planRef;
+    private DatabaseReference sharedPlansRef;
     //private ArrayList<User> users = new ArrayList<>();
 
     public FirebasePlanDBHelper() {
@@ -38,6 +30,18 @@ public class FirebasePlanDBHelper {
 
     public DatabaseReference getReference() {
         return planRef;
+    }
+
+    public DatabaseReference getSharedReference() {
+        return sharedPlansRef;
+    }
+
+    public void sharePlan(Plan plan) {
+        sharedPlansRef.child(plan.getPlan_id()).setValue(plan);
+    }
+
+    public void deleteSharedPlan(String id) {
+        sharedPlansRef.child(id).removeValue();
     }
 }
 
