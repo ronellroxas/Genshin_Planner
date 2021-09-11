@@ -87,7 +87,12 @@ public class PlanListActivity extends AppCompatActivity {
                 Log.d("SNAPSHOT", snapshot.toString());
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Plan curr_plan  = dataSnapshot.getValue(Plan.class);
-                    planArrayList.add(curr_plan);
+                    Log.d("OUTISIDE PLAN OWNER", curr_plan.getPlan_owner().getUid());
+                    Log.d("OUTISIDE CUR USER", sp.getString(UserKeys.UID_KEY.name(), "null"));
+                    if(curr_plan.getPlan_owner().getUid().contains(sp.getString(UserKeys.UID_KEY.name(), "null"))){
+                        Log.d("INSIDE PLAN OWNER", curr_plan.getPlan_owner().getUid());
+                        planArrayList.add(curr_plan);
+                    }
                 }
                 plAdapter.notifyDataSetChanged();
             }
