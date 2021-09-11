@@ -12,6 +12,9 @@ public class Plan {
     private int plan_resin_spent;
     private int plan_rating;
 
+    public Plan(){
+    }
+
     public Plan(User plan_owner, String plan_title, String plan_description, ArrayList<Item> plan_items, ArrayList<String> plan_route, int plan_resin_spent, int plan_rating){
         //this.plan_id = plan_id;
         this.plan_owner = plan_owner;

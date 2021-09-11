@@ -87,7 +87,7 @@ public class ViewPlanActivity extends AppCompatActivity {
         this.rb_rating.setRating(intent.getIntExtra(PlanKeys.PLAN_RATING_KEY.name(), 0));
 
         planDBHelper = new FirebasePlanDBHelper();
-        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("id").equalTo(intent.getIntExtra(PlanKeys.PLAN_ID_KEY.name(), 0));
+        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("id").equalTo(intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()));
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 

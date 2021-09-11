@@ -66,7 +66,6 @@ public class AssetsHelper {
 
     }
 
-
     public ArrayList<Item> getItemAssets() throws JSONException {
         ArrayList<Item> tempList = new ArrayList<>();
 

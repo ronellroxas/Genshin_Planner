@@ -21,6 +21,8 @@ public class Item {
         this.item_obtain_ways = item_obtain_ways;
     }
 
+    public Item(){}
+
     public Item (int item_img, String item_name, ArrayList<String> item_types, ArrayList<String> item_obtain_ways){
         this.item_img = item_img;
         this.item_name = item_name;
