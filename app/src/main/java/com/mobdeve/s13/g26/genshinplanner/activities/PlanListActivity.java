@@ -86,8 +86,8 @@ public class PlanListActivity extends AppCompatActivity {
             if(snapshot.exists()){
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Plan curr_plan  = dataSnapshot.getValue(Plan.class);
-                    planArrayList.add(curr_plan);
-                    Log.d("ACTIVITY", curr_plan.getPlan_id());
+                    if(curr_plan.getPlan_owner().getUid().contains(sp.getString(UserKeys.UID_KEY.name(), "none")))
+                        planArrayList.add(curr_plan);
                 }
                 plAdapter.notifyDataSetChanged();
             }
