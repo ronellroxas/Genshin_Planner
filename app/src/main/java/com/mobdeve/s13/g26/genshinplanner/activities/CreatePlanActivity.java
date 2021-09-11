@@ -220,7 +220,7 @@ public class CreatePlanActivity extends AppCompatActivity {
                 User user = new User(userId, email, name, username, uid, main);
 
                 FirebasePlanDBHelper dbHelper = new FirebasePlanDBHelper();
-                dbHelper.addPlan(new Plan(user, title, desc, items, routes, Integer.parseInt(resin), 0));
+                dbHelper.addPlan(new Plan(dbHelper.getReference().push().getKey(), user, title, desc, items, routes, Integer.parseInt(resin), 0));
 
                 Intent intent = new Intent(CreatePlanActivity.this, ViewPlanActivity.class);
                 finish();

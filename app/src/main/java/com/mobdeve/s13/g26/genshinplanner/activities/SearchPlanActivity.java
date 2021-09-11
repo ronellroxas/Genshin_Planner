@@ -131,7 +131,8 @@ public class SearchPlanActivity extends AppCompatActivity {
 
                 searchText = s.toString();  //save search
                 FirebasePlanDBHelper dbHelper = new FirebasePlanDBHelper();
-                Plan baitPlan = new Plan(new User(), "NULL", "NULL", null, null, 0, 0);
+
+                Plan baitPlan = new Plan(dbHelper.getReference().push().getKey(), new User(), "NULL", "NULL", null, null, 0, 0);
                 dbHelper.addPlan(baitPlan);
                 dbHelper.deletePlan(baitPlan.getPlan_id());
 
