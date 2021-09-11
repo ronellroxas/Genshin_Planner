@@ -32,6 +32,10 @@ public class FirebasePlanDBHelper {
         planRef.child(plan.getPlan_id()).setValue(plan);
     }
 
+    public void deletePlan(String id) {
+        planRef.child(id).removeValue();
+    }
+
     public DatabaseReference getReference() {
         return planRef;
     }

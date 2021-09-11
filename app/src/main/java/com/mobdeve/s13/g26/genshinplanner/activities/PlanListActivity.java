@@ -62,7 +62,6 @@ public class PlanListActivity extends AppCompatActivity {
 
     private void initRecyclerAdapter() {
         this.rvPlanList = findViewById(R.id.rv_plan_list);
-
         this.plAdapter = new PlanListAdapter(this.planArrayList, PlanListActivity.this);
         this.rvPlanList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         this.rvPlanList.setAdapter(this.plAdapter);
