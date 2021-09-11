@@ -29,10 +29,7 @@ public class FirebasePlanDBHelper {
     }
 
     public void addPlan(Plan plan) {
-        String key = planRef.push().getKey();
-        planRef.child(key).setValue(plan);
-        plan.setPlan_id(key);
-
+        planRef.child(plan.getPlan_id()).setValue(plan);
     }
 
     public DatabaseReference getReference() {

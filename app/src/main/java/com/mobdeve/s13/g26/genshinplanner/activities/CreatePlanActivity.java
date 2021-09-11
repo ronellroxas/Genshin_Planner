@@ -1,5 +1,6 @@
 package com.mobdeve.s13.g26.genshinplanner.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +18,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.CreatePlanItemsAdapter;
 import com.mobdeve.s13.g26.genshinplanner.adapters.CreatePlanRoutesAdapter;
 import com.mobdeve.s13.g26.genshinplanner.adapters.CustomSpinnerImageAdapter;
+import com.mobdeve.s13.g26.genshinplanner.keys.PlanKeys;
 import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
@@ -29,6 +35,7 @@ import com.mobdeve.s13.g26.genshinplanner.utils.AssetsHelper;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebasePlanDBHelper;
 import com.mobdeve.s13.g26.genshinplanner.views.CreatePlanViewHolder;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
 import java.util.ArrayList;
@@ -49,7 +56,7 @@ public class CreatePlanActivity extends AppCompatActivity {
     private CreatePlanViewHolder createPlanViewHolder;
 
     private SharedPreferences sp;
-
+    private FirebasePlanDBHelper planDBHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +75,39 @@ public class CreatePlanActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        Intent intent = getIntent();
+        String plan_name = intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name());
+        String plan_description = intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name());
+        String plan_resin = intent.getStringExtra(PlanKeys.PLAN_RESIN_KEY.name());
+        if(plan_name != null && plan_description != null && plan_resin != null){
+            this.createPlanViewHolder.setName(plan_name);
+            this.createPlanViewHolder.setDescription(plan_description);
+            this.createPlanViewHolder.setResin(plan_resin);
+        }
+        planDBHelper = new FirebasePlanDBHelper();
+        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("id").equalTo(sp.getString(PlanKeys.PLAN_ID_KEY.name(), "none"));
+        query.addListenerForSingleValueEvent(valueEventListener);
     }
+
+    ValueEventListener valueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+            if(snapshot.exists()){
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    Plan curr_plan = dataSnapshot.getValue(Plan.class);
+                    items.addAll(curr_plan.getPlan_items());
+                    routes.addAll(curr_plan.getPlan_route());
+                }
+                createPlanItemsAdapter.notifyDataSetChanged();
+                createPlanRoutesAdapter.notifyDataSetChanged();
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+        }
+    };
 
     private void initRecyclerAdapter() {
         this.routes = new ArrayList<>();

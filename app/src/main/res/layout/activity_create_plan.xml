@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginTop="8dp"
-        android:text="Create Plan"
+        android:text="Plan"
         android:textColor="@color/white"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="@+id/guideline12"

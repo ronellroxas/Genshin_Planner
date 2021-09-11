@@ -30,9 +30,10 @@ public class CreatePlanItemsAdapter extends RecyclerView.Adapter<ItemListViewHol
     @Override
     public ItemListViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-
         View itemView = layoutInflater.inflate(R.layout.data_list_item, parent, false);
         itemListViewHolder = new ItemListViewHolder(itemView);
+
+
 
         itemListViewHolder.setListeners(v -> {
             int index = itemListViewHolder.getBindingAdapterPosition();

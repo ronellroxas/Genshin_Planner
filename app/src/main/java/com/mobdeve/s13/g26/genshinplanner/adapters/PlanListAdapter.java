@@ -62,6 +62,27 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                 v.getContext().startActivity(intent);
             }
         });
+
+        holder.setOnLongClickListerners(new View.OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(v.getContext(), CreatePlanActivity.class);
+                Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
+
+                intent.putExtra(PlanKeys.PLAN_ID_KEY.name(), curr_plan.getPlan_id());
+                intent.putExtra(PlanKeys.PLAN_IMAGE.name(),getImageResources(curr_plan.getPlan_owner().getMain()));
+                intent.putExtra(PlanKeys.PLAN_TITLE_KEY.name(), curr_plan.getPlan_title());
+                intent.putExtra(PlanKeys.PLAN_OWNER_NAME.name(), curr_plan.getPlan_owner().getUsername());
+                intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), curr_plan.getPlan_owner().getUid());
+                intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), curr_plan.getPlan_resin_spent());
+                intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), curr_plan.getPlan_description());
+                intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_rating());
+
+                v.getContext().startActivity(intent);
+
+                return true;
+            }
+        });
         return holder;
     }
 

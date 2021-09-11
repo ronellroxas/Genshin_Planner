@@ -72,4 +72,8 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
     public void setListeners(View.OnClickListener ocl){
         cl_plan_template.setOnClickListener(ocl);
     }
+
+    public void setOnLongClickListerners(View.OnLongClickListener olcl){
+        cl_plan_template.setOnLongClickListener(olcl);
+    }
 }

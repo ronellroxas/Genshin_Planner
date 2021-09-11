@@ -15,6 +15,8 @@ import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.utils.AssetsHelper;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
 
+import java.lang.reflect.Field;
+
 public class HomeActivity extends AppCompatActivity {
 
     private SharedPreferences sp;
@@ -56,6 +58,8 @@ public class HomeActivity extends AppCompatActivity {
         this.tvUsername = findViewById(R.id.tv_home_name);
         this.tvUid = findViewById(R.id.tv_home_uid);
 
+
+        this.imageView.setImageResource(getImageResources(sp.getString(UserKeys.MAIN_KEY.name(), null)));
         this.tvUsername.setText(sp.getString(UserKeys.USERNAME_KEY.name(), "Error"));
         this.tvUid.setText(sp.getString(UserKeys.UID_KEY.name(), "Error"));
 
@@ -104,5 +108,22 @@ public class HomeActivity extends AppCompatActivity {
             finish();
             startActivity(intent);
         });
+    }
+
+    public int getImageResources(String main) {
+        Field[] fields = R.drawable.class.getDeclaredFields();
+        try {
+            for (int i = 0; i < fields.length; i++) {
+                String filename = fields[i].getName();
+
+                if (filename.contains("characters_") && filename.contains(main.toLowerCase())) //remove filenames with _
+                    return fields[i].getInt(null);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
     }
 }

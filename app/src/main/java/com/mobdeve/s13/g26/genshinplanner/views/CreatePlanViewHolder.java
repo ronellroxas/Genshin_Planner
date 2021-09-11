@@ -52,4 +52,16 @@ public class CreatePlanViewHolder {
     public void setCancelListener(View.OnClickListener listener) {
         this.btnCancel.setOnClickListener(listener);
     }
+
+    public void setName(String name){
+        this.etName.setText(name);
+    }
+
+    public void setDescription(String description){
+        this.etDescription.setText(description);
+    }
+
+    public void setResin(String text){
+        this.etResin.setText(text);
+    }
 }
