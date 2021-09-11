@@ -41,6 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText etUid;
     private Spinner spinnerMain;
 
+    //spinner adapter
+    ArrayAdapter<String> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +78,23 @@ public class RegisterActivity extends AppCompatActivity {
         etEmail.setText(sp.getString(UserKeys.EMAIL_KEY.name(), null));
         etName.setText(sp.getString(UserKeys.NAME_KEY.name(), null));
 
+        //if editing profile only, can initialize these fields
+        String username = sp.getString(UserKeys.USERNAME_KEY.name(), null);
+        String uid = sp.getString(UserKeys.UID_KEY.name(), null);
+        String main = sp.getString(UserKeys.MAIN_KEY.name(), null);
+
         //Disable editing of email
         etEmail.setFocusable(false);
         etEmail.setClickable(false);
 
         //initialize spinner content
         initSpinnerContent();
+
+        if(username != null && uid != null && main != null) {
+            etUsername.setText(username);
+            etUid.setText(uid);
+            spinnerMain.setSelection(adapter.getPosition(main));
+        }
     }
 
     private Boolean isFormFilled() {
@@ -118,7 +132,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             String[] charList = new String[characters.size()];
             charList = characters.toArray(charList);
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, charList);
+            adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, charList);
             spinnerMain.setAdapter(adapter);
         }
         catch (Exception e) {

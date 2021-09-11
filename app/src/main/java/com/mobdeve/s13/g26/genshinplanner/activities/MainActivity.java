@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull @NotNull DataSnapshot snapshot, @Nullable @org.jetbrains.annotations.Nullable String previousChildName) {
                 Intent intent = null;
-
+                
                 if(snapshot.exists()) {
                     User user = snapshot.getValue(User.class);
 

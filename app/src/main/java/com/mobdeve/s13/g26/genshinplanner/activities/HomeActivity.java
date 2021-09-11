@@ -24,11 +24,12 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvUid;
 
     //buttons
-    private ImageButton btnViewCharacters;
     private ImageView  imageView;
     private ImageButton btnViewSavedPlans;
-    private ImageButton btnCreatePlans;
+    private ImageButton btnSearchPlans;
+    private ImageButton btnViewCharacters;
     private ImageButton btnViewItems;
+    private ImageButton btnViewProfile;
     private ImageButton btnLogout;
 
     @Override
@@ -37,9 +38,11 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         this.imageView = findViewById(R.id.imageView);
-        this.btnViewCharacters = findViewById(R.id.btn_home_vwchar);
         this.btnViewSavedPlans = findViewById(R.id.btn_home_svdplans);
+        this.btnSearchPlans = findViewById(R.id.btn_home_srhplans);
+        this.btnViewCharacters = findViewById(R.id.btn_home_vwchar);
         this.btnViewItems = findViewById(R.id.btn_home_vwitems);
+        this.btnViewProfile = findViewById(R.id.btn_home_vwprof);
         this.btnLogout = findViewById(R.id.btn_home_logout);
 
         this.sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -59,12 +62,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initializeButtons() {
-        this.btnViewCharacters.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, CharacterListActivity.class);
-
-            startActivity(intent);
-        });
-
         imageView.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, ViewProfileActivity.class);
 
@@ -77,18 +74,34 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        this.btnSearchPlans.setOnClickListener(v -> {
+
+        });
+
+        this.btnViewCharacters.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, CharacterListActivity.class);
+
+            startActivity(intent);
+        });
+
         this.btnViewItems.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, ItemListActivity.class);
 
             startActivity(intent);
         });
 
+        this.btnViewProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, ViewProfileActivity.class);
+
+            startActivity(intent);
+        });
+
         this.btnLogout.setOnClickListener(v -> {
             Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-            FirebaseUserDBHelper userDBHelper = new FirebaseUserDBHelper();
-            userDBHelper.logout();
-
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            sp.edit().clear().commit(); //clear preferences
+            FirebaseUserDBHelper dbHelper = new FirebaseUserDBHelper();
+            dbHelper.logout();
+            finish();
             startActivity(intent);
         });
     }

@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.CharacterListAdapter;
 import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Character;
+import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -21,16 +24,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
-    private ArrayList<Character> charList;
-    private ArrayList<String> userown_list;
 
     private CircleImageView civ_picture;
     private TextView tv_name;
     private TextView tv_uid;
     private TextView tv_email;
 
-    private RecyclerView char_recycler_view;
-    private CharacterListAdapter characterListAdapter;
+    private Button btnEditProfile;
+    private Button btnSignout;
+
+
     private SharedPreferences sp;
 
     @Override
@@ -44,11 +47,8 @@ public class ViewProfileActivity extends AppCompatActivity {
         this.tv_uid = findViewById(R.id.tv_view_prof_uid);
         this.tv_email = findViewById(R.id.tv_view_prof_email);
 
-        charList = new ArrayList<Character>();
-        userown_list = new ArrayList<String>();
-        getUserOwnedCharacters();
         initializeDetails();
-        //initRecyclerAdapter();
+        initializeButtons();
     }
 
     private void initializeDetails(){
@@ -61,6 +61,27 @@ public class ViewProfileActivity extends AppCompatActivity {
         this.tv_uid.setText(sp.getString(UserKeys.UID_KEY.name(), null));
         this.tv_email.setText(sp.getString(UserKeys.EMAIL_KEY.name(), null));
     }
+
+    private void initializeButtons() {
+        this.btnEditProfile = findViewById(R.id.btn_view_prof_edit_prof);
+        this.btnSignout = findViewById(R.id.btn_view_prof_signout);
+
+        btnEditProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(ViewProfileActivity.this, RegisterActivity.class);
+
+            startActivity(intent);
+        });
+
+        btnSignout.setOnClickListener(v -> {
+            Intent intent = new Intent(ViewProfileActivity.this, MainActivity.class);
+            sp.edit().clear().commit(); //clear preferences
+            FirebaseUserDBHelper dbHelper = new FirebaseUserDBHelper();
+            dbHelper.logout();
+            finish();
+            startActivity(intent);
+        });
+    }
+
 
     public int getImageResources(String main) {
         Field[] fields = R.drawable.class.getDeclaredFields();
@@ -79,40 +100,4 @@ public class ViewProfileActivity extends AppCompatActivity {
         return -1;
     }
 
-    private void initRecyclerAdapter() {
-        //getImageResources();
-        this.char_recycler_view = findViewById(R.id.rv_view_profile_charlist);
-        this.characterListAdapter = new CharacterListAdapter(this.charList);
-
-        this.char_recycler_view.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false));
-        this.char_recycler_view.setAdapter(this.characterListAdapter);
-    }
-
-//    private void getImageResources() {
-//        Field[] fields = R.drawable.class.getDeclaredFields();
-//
-//        try {
-//            for (int i = 0; i < fields.length; i++) {
-//                String filename = fields[i].getName();
-//                for (int j = 0; j < this.userown_list.size(); j++){
-//                    if (!filename.contains("_") && !filename.contains("background") && filename.contains(userown_list.get(j))) //remove filenames with _
-//                        this.charList.add(fields[i].getInt(null));
-//                }
-//
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    private void getUserOwnedCharacters(){
-        userown_list.add("ayaka");
-        userown_list.add("childe");
-        userown_list.add("fischl");
-        userown_list.add("keqing");
-        userown_list.add("noelle");
-        userown_list.add("barbara");
-        userown_list.add("zhongli");
-    }
 }
