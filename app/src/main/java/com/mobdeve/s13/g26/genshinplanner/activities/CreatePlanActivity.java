@@ -86,7 +86,7 @@ public class CreatePlanActivity extends AppCompatActivity {
             this.createPlanViewHolder.setResin(String.valueOf(plan_resin));
         }
         planDBHelper = new FirebasePlanDBHelper();
-        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("id").equalTo(intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()));
+        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("plan_title").equalTo(intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()));
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 
