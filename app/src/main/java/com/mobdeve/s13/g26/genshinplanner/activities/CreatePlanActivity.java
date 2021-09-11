@@ -78,11 +78,11 @@ public class CreatePlanActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String plan_name = intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name());
         String plan_description = intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name());
-        String plan_resin = intent.getStringExtra(PlanKeys.PLAN_RESIN_KEY.name());
-        if(plan_name != null && plan_description != null && plan_resin != null){
+        int plan_resin = intent.getIntExtra(PlanKeys.PLAN_RESIN_KEY.name(), -1);
+        if(plan_name != null && plan_description != null && plan_resin != -1){
             this.createPlanViewHolder.setName(plan_name);
             this.createPlanViewHolder.setDescription(plan_description);
-            this.createPlanViewHolder.setResin(plan_resin);
+            this.createPlanViewHolder.setResin(String.valueOf(plan_resin));
         }
         planDBHelper = new FirebasePlanDBHelper();
         Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("id").equalTo(sp.getString(PlanKeys.PLAN_ID_KEY.name(), "none"));

@@ -83,7 +83,7 @@ public class ViewPlanActivity extends AppCompatActivity {
         this.tv_plan_username.setText(intent.getStringExtra(PlanKeys.PLAN_OWNER_NAME.name()));
         this.tv_plan_uid.setText(intent.getStringExtra(PlanKeys.PLAN_OWNER_UID.name()));
         this.tv_plan_description.setText(intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name()));
-        this.tv_plan_resin.setText(intent.getStringExtra(PlanKeys.PLAN_RESIN_KEY.name()));
+        this.tv_plan_resin.setText(intent.getIntExtra(PlanKeys.PLAN_RESIN_KEY.name(), 0));
         this.rb_rating.setRating(intent.getIntExtra(PlanKeys.PLAN_RATING_KEY.name(), 0));
 
         planDBHelper = new FirebasePlanDBHelper();
