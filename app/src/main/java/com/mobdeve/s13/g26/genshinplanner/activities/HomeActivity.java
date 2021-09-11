@@ -75,7 +75,9 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         this.btnSearchPlans.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeActivity.this, SearchPlanActivity.class);
 
+            startActivity(intent);
         });
 
         this.btnViewCharacters.setOnClickListener(v -> {

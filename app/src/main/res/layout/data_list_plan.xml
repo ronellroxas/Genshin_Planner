@@ -5,6 +5,7 @@
     android:id="@+id/cl_plan_template"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
     android:background="@drawable/shape_plan_container"
     android:paddingBottom="8dp">
 
