@@ -17,6 +17,7 @@ public class FirebasePlanDBHelper {
     public FirebasePlanDBHelper() {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://genshin-planner-323108-default-rtdb.asia-southeast1.firebasedatabase.app/");
         planRef = database.getReference("plans");
+        sharedPlansRef = database.getReference("shared_plans");
 
     }
 

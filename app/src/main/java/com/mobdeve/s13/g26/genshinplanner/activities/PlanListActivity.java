@@ -84,10 +84,10 @@ public class PlanListActivity extends AppCompatActivity {
         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
             planArrayList.clear();
             if(snapshot.exists()){
-                Log.d("SNAPSHOT", snapshot.toString());
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Plan curr_plan  = dataSnapshot.getValue(Plan.class);
                     planArrayList.add(curr_plan);
+                    Log.d("ACTIVITY", curr_plan.getPlan_id());
                 }
                 plAdapter.notifyDataSetChanged();
             }
