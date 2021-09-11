@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.media.UnsupportedSchemeException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -85,7 +86,7 @@ public class CreatePlanActivity extends AppCompatActivity {
             this.createPlanViewHolder.setResin(String.valueOf(plan_resin));
         }
         planDBHelper = new FirebasePlanDBHelper();
-        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("id").equalTo(sp.getString(PlanKeys.PLAN_ID_KEY.name(), "none"));
+        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("id").equalTo(intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()));
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 
@@ -93,6 +94,7 @@ public class CreatePlanActivity extends AppCompatActivity {
         @Override
         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
             if(snapshot.exists()){
+                Log.d("SNAPSHOT", snapshot.toString());
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Plan curr_plan = dataSnapshot.getValue(Plan.class);
                     items.addAll(curr_plan.getPlan_items());
