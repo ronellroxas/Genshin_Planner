@@ -70,7 +70,7 @@ public class SearchPlanActivity extends AppCompatActivity {
     public void loadData() {
         planDBHelper = new FirebasePlanDBHelper();
 
-        DatabaseReference dbref = planDBHelper.getReference();
+        DatabaseReference dbref = planDBHelper.getSharedReference();
         AddEditTextListener();
         dbref.addValueEventListener(valueEventListener);
     }

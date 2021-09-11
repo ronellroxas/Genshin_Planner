@@ -2,6 +2,8 @@ package com.mobdeve.s13.g26.genshinplanner.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.mobdeve.s13.g26.genshinplanner.activities.SearchPlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewPlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewProfileActivity;
 import com.mobdeve.s13.g26.genshinplanner.keys.PlanKeys;
+import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebasePlanDBHelper;
 import com.mobdeve.s13.g26.genshinplanner.views.ItemListViewHolder;
@@ -40,6 +43,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
     private ArrayList<Plan> planArrayList;
     public Context cxt;
     private FirebasePlanDBHelper dbHelper;
+    private String[] arrOptions;
 
     public PlanListAdapter(ArrayList<Plan> pl, Context cxt){
         this.planArrayList = pl;
@@ -124,15 +128,16 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
 
     private void initSpinnerOptions(PlanListViewHolder holder) {
         Spinner spinnerOptions = holder.getSpinnerOptions();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(cxt);
 
-        String[] arrOptions = {"", "Edit Plan", "Share Plan", "Remove Plan"};
+        arrOptions = new String[]{"", "Edit Plan", "Share Plan", "Remove Plan"};
 
         if(holder.getBindingAdapterPosition() >= 0)
-            isPlanShared(arrOptions, holder.getBindingAdapterPosition());
+            isPlanShared(holder.getBindingAdapterPosition());
 
         //change options if viewing from searchPlan
         if(cxt instanceof SearchPlanActivity) {
-            arrOptions = new String[]{"", "Save Plan"};
+                arrOptions = new String[]{"", "Save Plan"};
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(cxt, R.layout.support_simple_spinner_dropdown_item, arrOptions);
@@ -148,7 +153,6 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
 
                 if(!start) {
                     Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
-                    Log.d("TAG", curr_plan.getPlan_id());
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("Edit Plan")) {
                         Intent intent = new Intent(cxt, CreatePlanActivity.class);
 
@@ -165,9 +169,12 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("share plan")) {
                         dbHelper.sharePlan(curr_plan);
+                        adapter.getItem(2).replace("Share", "Unshare");
+                        adapter.notifyDataSetChanged();
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("remove plan")) {
-                        dbHelper.deleteSharedPlan(curr_plan.getPlan_id());
+                        dbHelper.deletePlan(curr_plan.getPlan_id());
+                        planArrayList.remove(curr_plan);
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("save plan")) {
                         dbHelper.addPlan(curr_plan);
@@ -183,12 +190,12 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         });
     }
 
-    private void isPlanShared(String[] arrOptions, int position) {
-        dbHelper.getSharedReference().orderByValue().equalTo(planArrayList.get(position).getPlan_id()).addValueEventListener(new ValueEventListener() {
+    private void isPlanShared(int position) {
+        dbHelper.getSharedReference().orderByChild("plan_id").equalTo(planArrayList.get(position).getPlan_id()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                Log.d("TEST:", snapshot.toString());
-                arrOptions[2] = "Unshare Plan";
+                if(snapshot.exists())
+                    arrOptions[2] = "Unshare Plan";
             }
 
             @Override
