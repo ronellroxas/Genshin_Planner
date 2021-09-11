@@ -84,14 +84,12 @@ public class ViewPlanActivity extends AppCompatActivity {
         this.tv_plan_username.setText(intent.getStringExtra(PlanKeys.PLAN_OWNER_NAME.name()));
         this.tv_plan_uid.setText(intent.getStringExtra(PlanKeys.PLAN_OWNER_UID.name()));
         this.tv_plan_description.setText(intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name()));
-
-        String text = "" + intent.getIntExtra(PlanKeys.PLAN_RESIN_KEY.name(), 0);
-        this.tv_plan_resin.setText(text);
+        this.tv_plan_resin.setText(intent.getStringExtra(PlanKeys.PLAN_RESIN_KEY.name()));
         this.rb_rating.setRating(intent.getIntExtra(PlanKeys.PLAN_RATING_KEY.name(), 0));
 
         planDBHelper = new FirebasePlanDBHelper();
         Log.d("STRING", "" + intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()));
-        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("plan_title").equalTo(intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()));
+        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("plan_id").equalTo(intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()));
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 

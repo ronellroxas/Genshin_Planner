@@ -39,6 +39,7 @@ import com.mobdeve.s13.g26.genshinplanner.views.CreatePlanViewHolder;
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class CreatePlanActivity extends AppCompatActivity {
@@ -86,7 +87,7 @@ public class CreatePlanActivity extends AppCompatActivity {
             this.createPlanViewHolder.setResin(String.valueOf(plan_resin));
         }
         planDBHelper = new FirebasePlanDBHelper();
-        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("plan_title").equalTo(intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()));
+        Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("plan_id").equalTo(intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()));
         query.addListenerForSingleValueEvent(valueEventListener);
     }
 
@@ -210,21 +211,35 @@ public class CreatePlanActivity extends AppCompatActivity {
             if(!title.isEmpty() && !desc.isEmpty() && !resin.isEmpty() && items.size() > 0 && routes.size() > 0) {
 
                 //rebuild user
-                String userId = sp.getString(UserKeys.ID_KEY.name(), "Error");
-                String email = sp.getString(UserKeys.EMAIL_KEY.name(), "Error");
-                String name = sp.getString(UserKeys.NAME_KEY.name(), "Error");
-                String username = sp.getString(UserKeys.USERNAME_KEY.name(), "Error");
-                String uid = sp.getString(UserKeys.UID_KEY.name(), "Error");
-                String main = sp.getString(UserKeys.MAIN_KEY.name(), "Error");
+                String userId = sp.getString(UserKeys.ID_KEY.name(), null);
+                String email = sp.getString(UserKeys.EMAIL_KEY.name(), null);
+                String name = sp.getString(UserKeys.NAME_KEY.name(), null);
+                String username = sp.getString(UserKeys.USERNAME_KEY.name(), null);
+                String uid = sp.getString(UserKeys.UID_KEY.name(), null);
+                String main = sp.getString(UserKeys.MAIN_KEY.name(), null);
 
                 User user = new User(userId, email, name, username, uid, main);
 
+                Intent intent = getIntent();
                 FirebasePlanDBHelper dbHelper = new FirebasePlanDBHelper();
-                dbHelper.addPlan(new Plan(dbHelper.getReference().push().getKey(), user, title, desc, items, routes, Integer.parseInt(resin), 0));
 
-                Intent intent = new Intent(CreatePlanActivity.this, ViewPlanActivity.class);
+                if(intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()) != null){
+                    dbHelper.addPlan(new Plan(dbHelper.getReference().getKey(), user, title, desc, items, routes, Integer.parseInt(resin), 0));
+                }else{
+                    dbHelper.addPlan(new Plan(dbHelper.getReference().push().getKey(), user, title, desc, items, routes, Integer.parseInt(resin), 0));
+                }
+
+                Intent new_intent = new Intent(CreatePlanActivity.this, PlanListActivity.class);
+//                new_intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), 0);
+//                new_intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), Integer.parseInt(resin));
+//                new_intent.putExtra(PlanKeys.PLAN_TITLE_KEY.name(), title);
+//                new_intent.putExtra(PlanKeys.PLAN_OWNER_NAME.name(), username);
+//                new_intent.putExtra(PlanKeys.PLAN_IMAGE.name(),getImageResources(main));
+//                new_intent.putExtra(PlanKeys.PLAN_ID_KEY.name(), dbHelper.getReference().push().getKey());
+//                new_intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), uid);
+//                new_intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), desc);
                 finish();
-                startActivity(intent);
+                startActivity(new_intent);
 
             }
             else  {
@@ -236,4 +251,22 @@ public class CreatePlanActivity extends AppCompatActivity {
             finish();
         });
     }
+
+    private int getImageResources(String main) {
+        Field[] fields = R.drawable.class.getDeclaredFields();
+        try {
+            for (int i = 0; i < fields.length; i++) {
+                String filename = fields[i].getName();
+
+                if (filename.contains("characters_") && filename.contains(main.toLowerCase())) //remove filenames with _
+                    return fields[i].getInt(null);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
 }

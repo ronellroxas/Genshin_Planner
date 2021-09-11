@@ -177,6 +177,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("remove plan")) {
                         dbHelper.deletePlan(curr_plan.getPlan_id());
                         planArrayList.remove(curr_plan);
+                        PlanListAdapter.this.notifyDataSetChanged();
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("save plan")) {
                         String userId = sp.getString(UserKeys.ID_KEY.name(), null);
