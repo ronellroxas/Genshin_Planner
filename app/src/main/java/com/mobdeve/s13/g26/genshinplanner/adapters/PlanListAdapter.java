@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,6 +30,7 @@ import com.mobdeve.s13.g26.genshinplanner.activities.ViewProfileActivity;
 import com.mobdeve.s13.g26.genshinplanner.keys.PlanKeys;
 import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
+import com.mobdeve.s13.g26.genshinplanner.models.User;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebasePlanDBHelper;
 import com.mobdeve.s13.g26.genshinplanner.views.ItemListViewHolder;
 import com.mobdeve.s13.g26.genshinplanner.views.PlanListViewHolder;
@@ -177,7 +179,16 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                         planArrayList.remove(curr_plan);
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("save plan")) {
+                        String userId = sp.getString(UserKeys.ID_KEY.name(), null);
+                        String email = sp.getString(UserKeys.EMAIL_KEY.name(), null);
+                        String name = sp.getString(UserKeys.NAME_KEY.name(), null);
+                        String username = sp.getString(UserKeys.USERNAME_KEY.name(), null);
+                        String uid = sp.getString(UserKeys.UID_KEY.name(), null);
+                        String main = sp.getString(UserKeys.MAIN_KEY.name(), null);
+                        curr_plan.setPlan_owner(new User(userId, email, name, username, uid, main));
+                        curr_plan.setPlan_id(dbHelper.getReference().push().getKey());
                         dbHelper.addPlan(curr_plan);
+                        Toast.makeText(cxt, "Plan " + curr_plan.getPlan_title() + " saved.",Toast.LENGTH_SHORT).show();
                     }
                 }
                 start = false;
