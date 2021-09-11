@@ -6,6 +6,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.activities.CreatePlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.PlanListActivity;
+import com.mobdeve.s13.g26.genshinplanner.activities.SearchPlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewPlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewProfileActivity;
 import com.mobdeve.s13.g26.genshinplanner.keys.PlanKeys;
@@ -83,6 +88,9 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                 return true;
             }
         });
+
+        initSpinnerOptions(holder);
+
         return holder;
     }
 
@@ -129,4 +137,59 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         return -1;
     }
 
+    private void initSpinnerOptions(PlanListViewHolder holder) {
+        Spinner spinnerOptions = holder.getSpinnerOptions();
+
+        String[] arrOptions = {"Edit Plan", "Share Plan", "Remove Plan"};
+        //change options if viewing from searchPlan
+        if(cxt instanceof SearchPlanActivity) {
+            arrOptions = new String[]{"Save Plan"};
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(cxt, R.layout.support_simple_spinner_dropdown_item, arrOptions);
+        spinnerOptions.setAdapter(adapter);
+
+        //attach listener
+        spinnerOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            Boolean start = true;
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TextView tvView = (TextView)view;
+                tvView.setText(null);
+
+                if(!start) {
+                    if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("Edit Plan")) {
+                        Intent intent = new Intent(cxt, CreatePlanActivity.class);
+                        Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
+
+                        intent.putExtra(PlanKeys.PLAN_ID_KEY.name(), curr_plan.getPlan_id());
+                        intent.putExtra(PlanKeys.PLAN_IMAGE.name(),getImageResources(curr_plan.getPlan_owner().getMain()));
+                        intent.putExtra(PlanKeys.PLAN_TITLE_KEY.name(), curr_plan.getPlan_title());
+                        intent.putExtra(PlanKeys.PLAN_OWNER_NAME.name(), curr_plan.getPlan_owner().getUsername());
+                        intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), curr_plan.getPlan_owner().getUid());
+                        intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), curr_plan.getPlan_resin_spent());
+                        intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), curr_plan.getPlan_description());
+                        intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_rating());
+
+                        cxt.startActivity(intent);
+                    }
+                    if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("share plan")) {
+
+                    }
+                    if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("remove plan")) {
+
+                    }
+                    if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("save plan")) {
+
+                    }
+                }
+                start = false;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
 }

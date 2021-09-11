@@ -3,13 +3,13 @@ package com.mobdeve.s13.g26.genshinplanner.views;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.ItemListAdapter;
 
@@ -23,6 +23,8 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
     private TextView tv_plan_uid;
     private TextView tv_plan_resin;
     private RatingBar rb_start_rate;
+    private Spinner spinnerOptions;
+
     private RecyclerView rv_data_list_plan;
     public PlanListViewHolder(@NonNull @NotNull View itemView) {
         super(itemView);
@@ -34,6 +36,7 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
         this.tv_plan_resin = itemView.findViewById(R.id.tv_list_plan_resin);
         this.rb_start_rate = itemView.findViewById(R.id.rb_list_plan_rating);
         this.rv_data_list_plan = itemView.findViewById(R.id.rv_data_list_plan);
+        this.spinnerOptions = itemView.findViewById(R.id.spinner_list_plan_options);
     }
 
     public void setImagePlan(int image){
@@ -75,5 +78,9 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
 
     public void setOnLongClickListerners(View.OnLongClickListener olcl){
         cl_plan_template.setOnLongClickListener(olcl);
+    }
+
+    public Spinner getSpinnerOptions(){
+        return spinnerOptions;
     }
 }

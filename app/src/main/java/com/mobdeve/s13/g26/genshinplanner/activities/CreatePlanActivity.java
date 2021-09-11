@@ -182,11 +182,9 @@ public class CreatePlanActivity extends AppCompatActivity {
             Boolean start = true;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                ImageView ivView = (ImageView) view;
+                ivView.setVisibility(View.GONE);
                 if (!start){
-                    ImageView ivView = (ImageView) view;
-                    ivView.setVisibility(View.GONE);
-
-
                     int selected = spinnerAddItem.getSelectedItemPosition();
                     if (selected != -1) {
                         items.add(tempItemList.get(selected));
@@ -232,6 +230,10 @@ public class CreatePlanActivity extends AppCompatActivity {
             else  {
                 Toast.makeText(CreatePlanActivity.this, "Please fill-up empty fields.", Toast.LENGTH_SHORT).show();
             }
+        });
+
+        createPlanViewHolder.setCancelListener(v -> {
+            finish();
         });
     }
 }

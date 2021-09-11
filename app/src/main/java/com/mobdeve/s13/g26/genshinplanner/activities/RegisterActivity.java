@@ -60,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
                 Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
 
                 saveUser();
+                finish();
                 startActivity(intent);
             } else {
                 Toast.makeText(RegisterActivity.this, "Please fill-up empty fields.", Toast.LENGTH_SHORT).show();

@@ -123,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     intent = new Intent(MainActivity.this, RegisterActivity.class);
                 }
+                finish();
                 startActivity(intent);
             }
 
