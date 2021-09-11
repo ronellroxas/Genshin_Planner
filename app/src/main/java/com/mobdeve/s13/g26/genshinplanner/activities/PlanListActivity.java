@@ -84,15 +84,10 @@ public class PlanListActivity extends AppCompatActivity {
         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
             planArrayList.clear();
             if(snapshot.exists()){
-                Log.d("SNAPSHOT", snapshot.toString());
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Plan curr_plan  = dataSnapshot.getValue(Plan.class);
-                    Log.d("OUTISIDE PLAN OWNER", curr_plan.getPlan_owner().getUid());
-                    Log.d("OUTISIDE CUR USER", sp.getString(UserKeys.UID_KEY.name(), "null"));
-                    if(curr_plan.getPlan_owner().getUid().contains(sp.getString(UserKeys.UID_KEY.name(), "null"))){
-                        Log.d("INSIDE PLAN OWNER", curr_plan.getPlan_owner().getUid());
-                        planArrayList.add(curr_plan);
-                    }
+                    planArrayList.add(curr_plan);
+                    Log.d("ACTIVITY", curr_plan.getPlan_id());
                 }
                 plAdapter.notifyDataSetChanged();
             }

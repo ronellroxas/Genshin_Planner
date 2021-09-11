@@ -15,6 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.activities.CreatePlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.PlanListActivity;
@@ -23,6 +26,7 @@ import com.mobdeve.s13.g26.genshinplanner.activities.ViewPlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewProfileActivity;
 import com.mobdeve.s13.g26.genshinplanner.keys.PlanKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
+import com.mobdeve.s13.g26.genshinplanner.utils.FirebasePlanDBHelper;
 import com.mobdeve.s13.g26.genshinplanner.views.ItemListViewHolder;
 import com.mobdeve.s13.g26.genshinplanner.views.PlanListViewHolder;
 
@@ -35,10 +39,12 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
 
     private ArrayList<Plan> planArrayList;
     public Context cxt;
+    private FirebasePlanDBHelper dbHelper;
 
     public PlanListAdapter(ArrayList<Plan> pl, Context cxt){
         this.planArrayList = pl;
         this.cxt = cxt;
+        dbHelper = new FirebasePlanDBHelper();
     }
 
     @NonNull
@@ -65,27 +71,6 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                 intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_rating());
 
                 v.getContext().startActivity(intent);
-            }
-        });
-
-        holder.setOnLongClickListerners(new View.OnLongClickListener(){
-            @Override
-            public boolean onLongClick(View v) {
-                Intent intent = new Intent(v.getContext(), CreatePlanActivity.class);
-                Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
-
-                intent.putExtra(PlanKeys.PLAN_ID_KEY.name(), curr_plan.getPlan_id());
-                intent.putExtra(PlanKeys.PLAN_IMAGE.name(),getImageResources(curr_plan.getPlan_owner().getMain()));
-                intent.putExtra(PlanKeys.PLAN_TITLE_KEY.name(), curr_plan.getPlan_title());
-                intent.putExtra(PlanKeys.PLAN_OWNER_NAME.name(), curr_plan.getPlan_owner().getUsername());
-                intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), curr_plan.getPlan_owner().getUid());
-                intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), curr_plan.getPlan_resin_spent());
-                intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), curr_plan.getPlan_description());
-                intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_rating());
-
-                v.getContext().startActivity(intent);
-
-                return true;
             }
         });
 
@@ -140,10 +125,14 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
     private void initSpinnerOptions(PlanListViewHolder holder) {
         Spinner spinnerOptions = holder.getSpinnerOptions();
 
-        String[] arrOptions = {"Edit Plan", "Share Plan", "Remove Plan"};
+        String[] arrOptions = {"", "Edit Plan", "Share Plan", "Remove Plan"};
+
+        if(holder.getBindingAdapterPosition() >= 0)
+            isPlanShared(arrOptions, holder.getBindingAdapterPosition());
+
         //change options if viewing from searchPlan
         if(cxt instanceof SearchPlanActivity) {
-            arrOptions = new String[]{"Save Plan"};
+            arrOptions = new String[]{"", "Save Plan"};
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(cxt, R.layout.support_simple_spinner_dropdown_item, arrOptions);
@@ -158,9 +147,10 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                 tvView.setText(null);
 
                 if(!start) {
+                    Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
+                    Log.d("TAG", curr_plan.getPlan_id());
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("Edit Plan")) {
                         Intent intent = new Intent(cxt, CreatePlanActivity.class);
-                        Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
 
                         intent.putExtra(PlanKeys.PLAN_ID_KEY.name(), curr_plan.getPlan_id());
                         intent.putExtra(PlanKeys.PLAN_IMAGE.name(),getImageResources(curr_plan.getPlan_owner().getMain()));
@@ -174,13 +164,13 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                         cxt.startActivity(intent);
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("share plan")) {
-
+                        dbHelper.sharePlan(curr_plan);
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("remove plan")) {
-
+                        dbHelper.deleteSharedPlan(curr_plan.getPlan_id());
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("save plan")) {
-
+                        dbHelper.addPlan(curr_plan);
                     }
                 }
                 start = false;
@@ -188,6 +178,21 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void isPlanShared(String[] arrOptions, int position) {
+        dbHelper.getSharedReference().orderByValue().equalTo(planArrayList.get(position).getPlan_id()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                Log.d("TEST:", snapshot.toString());
+                arrOptions[2] = "Unshare Plan";
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });
