@@ -73,7 +73,7 @@ public class ViewPlanActivity extends AppCompatActivity {
         this.rv_item.setAdapter(this.itemListAdapter);
 
         this.rv_routes = findViewById(R.id.rv_routes);
-        this.planRoutesAdapter = new CreatePlanRoutesAdapter(this.route_list);
+        this.planRoutesAdapter = new CreatePlanRoutesAdapter(this.route_list, true);
         this.rv_routes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         this.rv_routes.setAdapter(this.planRoutesAdapter);
 

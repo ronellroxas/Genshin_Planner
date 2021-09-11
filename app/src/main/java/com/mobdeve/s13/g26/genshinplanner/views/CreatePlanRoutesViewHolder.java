@@ -29,6 +29,14 @@ public class CreatePlanRoutesViewHolder extends RecyclerView.ViewHolder {
         }
     }
 
+    public void disableDeletebutton(boolean disable){
+        if(disable){
+            ibDeleteButton.setVisibility(View.GONE);
+        }else{
+            ibDeleteButton.setVisibility(View.VISIBLE);
+        }
+    }
+
     public String getRouteName() {
         return this.tvRouteName.getText().toString();
     }

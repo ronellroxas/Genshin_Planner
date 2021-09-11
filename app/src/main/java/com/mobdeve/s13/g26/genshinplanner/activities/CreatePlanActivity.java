@@ -77,7 +77,7 @@ public class CreatePlanActivity extends AppCompatActivity {
         this.rvRoutes = findViewById(R.id.rv_create_plan_routes);
         this.rvItems = findViewById(R.id.rv_create_plan_items);
 
-        this.createPlanRoutesAdapter = new CreatePlanRoutesAdapter(routes);
+        this.createPlanRoutesAdapter = new CreatePlanRoutesAdapter(routes, false);
         this.createPlanItemsAdapter = new CreatePlanItemsAdapter(items);
 
         this.rvRoutes.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

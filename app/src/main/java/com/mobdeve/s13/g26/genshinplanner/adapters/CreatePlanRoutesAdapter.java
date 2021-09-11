@@ -22,9 +22,10 @@ public class CreatePlanRoutesAdapter extends RecyclerView.Adapter<CreatePlanRout
 
     private CreatePlanRoutesViewHolder routesViewHolder;
     private ArrayList<String> routes;
-
-    public CreatePlanRoutesAdapter(ArrayList<String> routes) {
+    private boolean disable;
+    public CreatePlanRoutesAdapter(ArrayList<String> routes, boolean disable) {
         this.routes = routes;
+        this.disable = disable;
     }
 
     @NonNull
@@ -40,6 +41,7 @@ public class CreatePlanRoutesAdapter extends RecyclerView.Adapter<CreatePlanRout
             int index = routesViewHolder.getBindingAdapterPosition();
             removeRoute(index);
         });
+        routesViewHolder.disableDeletebutton(this.disable);
 
         return routesViewHolder;
     }
