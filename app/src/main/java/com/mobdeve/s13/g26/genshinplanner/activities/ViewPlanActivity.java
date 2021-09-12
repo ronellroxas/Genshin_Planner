@@ -132,10 +132,10 @@ public class ViewPlanActivity extends AppCompatActivity {
 
     private void initRatingBarListeners() {
         rb_rating.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-            Boolean start = true;
+//            Boolean start = true;
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                if(!start) {
+//                if(!start) {
                     float curr_rating = rb_rating.getRating();
                     if(curr_rating == intent.getFloatExtra(PlanKeys.PLAN_RATING_KEY.name(), 0))
                         fab_confirm.setVisibility(View.GONE);
@@ -143,8 +143,8 @@ public class ViewPlanActivity extends AppCompatActivity {
                         fab_confirm.setVisibility(View.VISIBLE);
                     }
                 }
-                start = false;
-            }
+//                start = false;
+//            }
         });
     }
 
@@ -193,6 +193,21 @@ public class ViewPlanActivity extends AppCompatActivity {
             Toast.makeText(this, "Plan rating updated!",  Toast.LENGTH_SHORT).show();
     }
 
+    private void initializeRatingBar(Plan curr_plan) {
+        if(curr_plan != null) {
+            TextView tvRatingText = findViewById(R.id.tv_view_plan_rating);
+            String userId = sp.getString(UserKeys.ID_KEY.name(), null);
+            if(!userId.equals(curr_plan.getPlan_owner().getUserId())) {
+                rb_rating.setIsIndicator(false);
+                tvRatingText.setText("Rate this Plan");
+            }
+            else {
+                rb_rating.setIsIndicator(true);
+                tvRatingText.setText("Plan Rating");
+            }
+        }
+    }
+
     ValueEventListener valueEventListener = new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -202,6 +217,7 @@ public class ViewPlanActivity extends AppCompatActivity {
                     item_list.addAll(curr_plan.getPlan_items());
                     route_list.addAll(curr_plan.getPlan_route());
                     rating_list.addAll(curr_plan.getPlan_rating());
+                    initializeRatingBar(curr_plan);
                 }
                 itemListAdapter.notifyDataSetChanged();
                 planRoutesAdapter.notifyDataSetChanged();
