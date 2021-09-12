@@ -74,7 +74,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                 intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), curr_plan.getPlan_owner().getUid());
                 intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), resin);
                 intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), curr_plan.getPlan_description());
-                intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_rating());
+                intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_average_rating());
 
                 v.getContext().startActivity(intent);
             }
@@ -97,7 +97,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         }
         holder.setTitlePlan(curr_plan.getPlan_title());
         holder.setUIDPlan(curr_plan.getPlan_owner().getUid());
-        holder.setRatingPlan(curr_plan.getPlan_rating());
+        holder.setRatingPlan(curr_plan.getPlan_average_rating());
         holder.setResinPlan("" + curr_plan.getPlan_resin_spent());
         holder.setCreatorPlan(curr_plan.getPlan_owner().getUsername());
 
@@ -165,7 +165,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                         intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), curr_plan.getPlan_owner().getUid());
                         intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), curr_plan.getPlan_resin_spent());
                         intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), curr_plan.getPlan_description());
-                        intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_rating());
+                        intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_average_rating());
 
                         cxt.startActivity(intent);
                     }

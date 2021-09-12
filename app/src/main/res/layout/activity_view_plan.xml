@@ -159,11 +159,12 @@
     <RatingBar
         android:id="@+id/rb_plan_view_rating"
         style="@android:style/Widget.DeviceDefault.RatingBar.Indicator"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:isIndicator="true"
+        android:isIndicator="false"
         android:numStars="5"
-        android:stepSize="0.1"
+        android:stepSize="1"
+        android:progressTint="@color/base"
         app:layout_constraintBottom_toTopOf="@+id/gl_top"
         app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_middle" />
@@ -196,5 +197,29 @@
         app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_left_main"
         app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/tv_view_plan_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rate Plan"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/rb_plan_view_rating"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:layout_constraintStart_toStartOf="@+id/gl_middle" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_view_plan_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:tint="@color/black"
+        app:backgroundTint="@color/base"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bot_routes"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
+        app:srcCompat="?android:attr/textCheckMark"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

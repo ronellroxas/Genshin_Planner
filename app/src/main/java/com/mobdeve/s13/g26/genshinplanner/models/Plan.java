@@ -10,12 +10,12 @@ public class Plan {
     private ArrayList<Item> plan_items;
     private ArrayList<String> plan_route;
     private int plan_resin_spent;
-    private int plan_rating;
+    private ArrayList<Rating> plan_rating;
 
     public Plan(){
     }
 
-    public Plan(String plan_id, User plan_owner, String plan_title, String plan_description, ArrayList<Item> plan_items, ArrayList<String> plan_route, int plan_resin_spent, int plan_rating){
+    public Plan(String plan_id, User plan_owner, String plan_title, String plan_description, ArrayList<Item> plan_items, ArrayList<String> plan_route, int plan_resin_spent, ArrayList<Rating> plan_rating){
         this.plan_id = plan_id;
         this.plan_owner = plan_owner;
         this.plan_title = plan_title;
@@ -54,10 +54,17 @@ public class Plan {
         return plan_resin_spent;
     }
 
-    public int getPlan_rating() {
+    public ArrayList<Rating> getPlan_rating() {
         return plan_rating;
     }
 
+    public float getPlan_average_rating() {
+        float temp = 0;
+        for (Rating r: plan_rating) {
+            temp += r.getRating();
+        }
+        return temp;
+    }
     public void setPlan_id(String plan_id) {
         this.plan_id = plan_id;
     }
@@ -82,7 +89,7 @@ public class Plan {
         this.plan_route = plan_route;
     }
 
-    public void setPlan_rating(int plan_rating) {
+    public void setPlan_rating(ArrayList<Rating> plan_rating) {
         this.plan_rating = plan_rating;
     }
 
