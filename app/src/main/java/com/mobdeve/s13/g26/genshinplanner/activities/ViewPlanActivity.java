@@ -69,6 +69,8 @@ public class ViewPlanActivity extends AppCompatActivity {
     private Intent intent;
     private SharedPreferences sp;
 
+    private Plan curr_plan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -151,28 +153,28 @@ public class ViewPlanActivity extends AppCompatActivity {
     private void addRating(int rating) {
         FirebasePlanDBHelper dbHelper = new FirebasePlanDBHelper();
 
-        //rebuild user
-        User user = new User(   sp.getString(UserKeys.ID_KEY.name(), null),
-                                sp.getString(UserKeys.EMAIL_KEY.name(), null),
-                                sp.getString(UserKeys.NAME_KEY.name(), null),
-                                sp.getString(UserKeys.USERNAME_KEY.name(), null),
-                                sp.getString(UserKeys.UID_KEY.name(), null),
-                                sp.getString(UserKeys.MAIN_KEY.name(), null));
+//        //rebuild user
+//        User user = new User(   sp.getString(UserKeys.ID_KEY.name(), null),
+//                                sp.getString(UserKeys.EMAIL_KEY.name(), null),
+//                                sp.getString(UserKeys.NAME_KEY.name(), null),
+//                                sp.getString(UserKeys.USERNAME_KEY.name(), null),
+//                                sp.getString(UserKeys.UID_KEY.name(), null),
+//                                sp.getString(UserKeys.MAIN_KEY.name(), null));
 
-        //rebuild plan
-        Plan currPlan = new Plan(   intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()),
-                                    user,
-                                    intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()),
-                                    intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name()),
-                                    item_list, route_list,
-                                    intent.getIntExtra(PlanKeys.PLAN_RESIN_KEY.name(), 0));
+//        //rebuild plan
+//        Plan currPlan = new Plan(   intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()),
+//                                    user,
+//                                    intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()),
+//                                    intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name()),
+//                                    item_list, route_list,
+//                                    intent.getIntExtra(PlanKeys.PLAN_RESIN_KEY.name(), 0));
 
-        currPlan.setPlan_rating(rating_list);
+        curr_plan.setPlan_rating(rating_list);
 
         Boolean found = false;
         float sum = 0;
-        for(int i = 0; i < currPlan.getPlan_rating().size(); i++) {
-            Rating r = currPlan.getPlan_rating().get(i);
+        for(int i = 0; i < curr_plan.getPlan_rating().size(); i++) {
+            Rating r = curr_plan.getPlan_rating().get(i);
             if(r.getUserId().equals(sp.getString(UserKeys.ID_KEY.name(), null))) {
                 r.setRating(rating);
                 found = true;
@@ -180,12 +182,12 @@ public class ViewPlanActivity extends AppCompatActivity {
             sum += r.getRating();
         }
         if(!found) {
-            currPlan.getPlan_rating().add(new Rating(sp.getString(UserKeys.ID_KEY.name(), null), rating));
+            curr_plan.getPlan_rating().add(new Rating(sp.getString(UserKeys.ID_KEY.name(), null), rating));
         }
-        currPlan.setPlan_average_rating(sum/currPlan.getPlan_rating().size());
+        curr_plan.setPlan_average_rating(sum/curr_plan.getPlan_rating().size());
 
-        dbHelper.addPlan(currPlan);
-        dbHelper.sharePlan(currPlan);
+        dbHelper.addPlan(curr_plan);
+        dbHelper.sharePlan(curr_plan);
         fab_confirm.setVisibility(View.GONE);
         if(!found)
             Toast.makeText(this, "Plan rated!",  Toast.LENGTH_SHORT).show();
@@ -213,7 +215,7 @@ public class ViewPlanActivity extends AppCompatActivity {
         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
             if(snapshot.exists()){
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
-                    Plan curr_plan = dataSnapshot.getValue(Plan.class);
+                    curr_plan = dataSnapshot.getValue(Plan.class);
                     item_list.addAll(curr_plan.getPlan_items());
                     route_list.addAll(curr_plan.getPlan_route());
                     rating_list.addAll(curr_plan.getPlan_rating());
