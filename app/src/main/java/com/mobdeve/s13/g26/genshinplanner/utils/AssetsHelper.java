@@ -6,13 +6,17 @@ import android.content.res.Resources;
 import android.util.Log;
 
 
+import com.google.gson.JsonParser;
 import com.mobdeve.s13.g26.genshinplanner.R;
+import com.mobdeve.s13.g26.genshinplanner.models.Character;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
@@ -64,6 +68,92 @@ public class AssetsHelper {
             return null;
         }
 
+    }
+
+    private JSONObject readJSONObject(String path){
+        String json = "";
+
+        try {
+            InputStream iStream = this.manager.open(path);
+            int size = iStream.available();
+            byte[] buffer = new byte[size];
+            iStream.read(buffer);
+            iStream.close();
+            json = new String(buffer, "UTF-8");
+            JSONObject jsonObj = new JSONObject(json);
+            return jsonObj;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ArrayList<Character> getCharacterAssets() throws JSONException{
+        ArrayList<Character> tempList = new ArrayList<>();
+        String basePath = "data/characters/";
+        String[] paths = {"albedo", "amber", "ayaka", "barbara", "beidou",
+                          "bennett", "chongyun", "diluc", "diona", "eula",
+                          "fischl", "ganyu", "hu_tao", "jean", "kaeya",
+                          "kazuha", "keqing", "klee", "lisa", "mona",
+                          "ningguang", "noelle", "qiqi", "razor", "rosaria",
+                          "sucrose", "tartaglia", "traveler_anemo", "traveler_geo", "venti",
+                          "xiangling", "xiao", "xingqiu", "xinyan", "yanfei", "zhongli"};
+        Log.d("TAGG", "INSIDE get character assets");
+        for (String path : paths) {
+            tempList.add(getDetailsfromDir(basePath, path));
+        }
+        return tempList;
+    }
+
+    private Character getDetailsfromDir(String basePath, String character_path) throws JSONException {
+        String name = "";
+        String temp = "";
+        String weapon = "";
+        int rarity = 0;
+        int weap_type = 0, element = 0;
+            JSONObject jsonObject = readJSONObject(basePath + character_path + "/en.json");
+            Log.d("JSONObject", jsonObject.toString());
+            name = (String) jsonObject.get("name");
+            temp = (String) jsonObject.get("vision");
+            weapon = (String) jsonObject.get("weapon");
+            rarity = (int) jsonObject.get("rarity");
+
+            Log.d("Contents-JSON","Name "+ name);
+            Log.d("Contents-JSON","Temp " + temp);
+            Log.d("Contents-JSON","Weapon"  + weapon);
+            if (temp.contains("Electro")) {
+                element = 1;
+            } else if (temp.contains("Pyro")) {
+                element = 2;
+            } else if (temp.contains("Hydro")) {
+                element = 3;
+            } else if (temp.contains("Dendro")) {
+                element = 4;
+            } else if (temp.contains("Geo")) {
+                element = 5;
+            } else if (temp.contains("Cryo")) {
+                element = 6;
+            }
+
+            if (weapon.contains("Polearm")) {
+                weap_type = 1;
+            }
+            if (weapon.contains("Sword")) {
+                weap_type = 2;
+            }
+            if (weapon.contains("Claymore")) {
+                weap_type = 3;
+            }
+            if (weapon.contains("Bow")) {
+                weap_type = 4;
+            }
+            if (weapon.contains("Catalyst")) {
+                weap_type = 5;
+            }
+            int image = getImageResources(character_path);
+            ArrayList<Integer> ascension_mats = new ArrayList<>();
+            ArrayList<Integer> talent_mats = new ArrayList<>();
+            return new Character(image, name, weap_type, element, rarity, ascension_mats, talent_mats);
     }
 
     public ArrayList<Item> getItemAssets() throws JSONException {
@@ -194,6 +284,23 @@ public class AssetsHelper {
         final int resourceId = resources.getIdentifier(name, "drawable",
                 context.getPackageName());
         return resourceId;
+    }
+
+    private int getImageResources(String main) {
+        Field[] fields = R.drawable.class.getDeclaredFields();
+        try {
+            for (Field field : fields) {
+                String filename = field.getName();
+
+                if (filename.contains("characters_") && filename.contains(main.toLowerCase())) //remove filenames with _
+                    return field.getInt(null);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return R.drawable.baal;
     }
 
 }
