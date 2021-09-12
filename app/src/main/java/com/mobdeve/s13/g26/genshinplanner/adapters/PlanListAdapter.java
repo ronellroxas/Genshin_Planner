@@ -65,14 +65,14 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ViewPlanActivity.class);
                 Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
-                String resin = "Resin: " + curr_plan.getPlan_resin_spent();
+                //String resin = "Resin: " + curr_plan.getPlan_resin_spent();
 
                 intent.putExtra(PlanKeys.PLAN_ID_KEY.name(), curr_plan.getPlan_id());
                 intent.putExtra(PlanKeys.PLAN_IMAGE.name(),getImageResources(curr_plan.getPlan_owner().getMain()));
                 intent.putExtra(PlanKeys.PLAN_TITLE_KEY.name(), curr_plan.getPlan_title());
                 intent.putExtra(PlanKeys.PLAN_OWNER_NAME.name(), curr_plan.getPlan_owner().getUsername());
                 intent.putExtra(PlanKeys.PLAN_OWNER_UID.name(), curr_plan.getPlan_owner().getUid());
-                intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), resin);
+                intent.putExtra(PlanKeys.PLAN_RESIN_KEY.name(), curr_plan.getPlan_resin_spent());
                 intent.putExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name(), curr_plan.getPlan_description());
                 intent.putExtra(PlanKeys.PLAN_RATING_KEY.name(), curr_plan.getPlan_average_rating());
 

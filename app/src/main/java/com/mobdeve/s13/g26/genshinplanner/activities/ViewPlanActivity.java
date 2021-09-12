@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,6 +30,8 @@ import com.mobdeve.s13.g26.genshinplanner.keys.PlanKeys;
 import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Item;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
+import com.mobdeve.s13.g26.genshinplanner.models.Rating;
+import com.mobdeve.s13.g26.genshinplanner.models.User;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebasePlanDBHelper;
 import com.squareup.okhttp.Route;
 
@@ -60,8 +64,10 @@ public class ViewPlanActivity extends AppCompatActivity {
 
     private ArrayList<Item> item_list;
     private ArrayList<String> route_list;
+    private ArrayList<Rating> rating_list;
 
     private Intent intent;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,8 @@ public class ViewPlanActivity extends AppCompatActivity {
 
         this.item_list = new ArrayList<>();
         this.route_list = new ArrayList<>();
+        this.rating_list = new ArrayList<>();
+        this.sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         initializeComponents();
         initRecyclerAdapter();
@@ -114,8 +122,8 @@ public class ViewPlanActivity extends AppCompatActivity {
         this.tv_plan_username.setText(intent.getStringExtra(PlanKeys.PLAN_OWNER_NAME.name()));
         this.tv_plan_uid.setText(intent.getStringExtra(PlanKeys.PLAN_OWNER_UID.name()));
         this.tv_plan_description.setText(intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name()));
-        this.tv_plan_resin.setText(intent.getStringExtra(PlanKeys.PLAN_RESIN_KEY.name()));
-        this.rb_rating.setRating(intent.getIntExtra(PlanKeys.PLAN_RATING_KEY.name(), 0));
+        this.tv_plan_resin.setText("Resin: " + String.valueOf(intent.getIntExtra(PlanKeys.PLAN_RESIN_KEY.name(), 0)));
+        this.rb_rating.setRating(intent.getFloatExtra(PlanKeys.PLAN_RATING_KEY.name(), 0));
 
         planDBHelper = new FirebasePlanDBHelper();
         Query query = planDBHelper.getReference().limitToFirst(1).orderByChild("plan_id").equalTo(intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()));
@@ -128,8 +136,8 @@ public class ViewPlanActivity extends AppCompatActivity {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 if(!start) {
-                    int curr_rating = (int) rb_rating.getRating();
-                    if(curr_rating == intent.getIntExtra(PlanKeys.PLAN_RATING_KEY.name(), 0))
+                    float curr_rating = rb_rating.getRating();
+                    if(curr_rating == intent.getFloatExtra(PlanKeys.PLAN_RATING_KEY.name(), 0))
                         fab_confirm.setVisibility(View.GONE);
                     else {
                         fab_confirm.setVisibility(View.VISIBLE);
@@ -142,20 +150,47 @@ public class ViewPlanActivity extends AppCompatActivity {
 
     private void addRating(int rating) {
         FirebasePlanDBHelper dbHelper = new FirebasePlanDBHelper();
-        String planId = intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name());
 
+        //rebuild user
+        User user = new User(   sp.getString(UserKeys.ID_KEY.name(), null),
+                                sp.getString(UserKeys.EMAIL_KEY.name(), null),
+                                sp.getString(UserKeys.NAME_KEY.name(), null),
+                                sp.getString(UserKeys.USERNAME_KEY.name(), null),
+                                sp.getString(UserKeys.UID_KEY.name(), null),
+                                sp.getString(UserKeys.MAIN_KEY.name(), null));
 
-        Map<String, Object> map = new HashMap<>();
-        String path = planId + "/plan_rating";
-        Log.d("PATH", path);
-        map.put(path, rating);
+        //rebuild plan
+        Plan currPlan = new Plan(   intent.getStringExtra(PlanKeys.PLAN_ID_KEY.name()),
+                                    user,
+                                    intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()),
+                                    intent.getStringExtra(PlanKeys.PLAN_DESCRIPTION_KEY.name()),
+                                    item_list, route_list,
+                                    intent.getIntExtra(PlanKeys.PLAN_RESIN_KEY.name(), 0));
 
-        //update shared and nonshared databases
-        dbHelper.getReference().updateChildren(map);
-        dbHelper.getSharedReference().updateChildren(map);
+        currPlan.setPlan_rating(rating_list);
 
+        Boolean found = false;
+        float sum = 0;
+        for(int i = 0; i < currPlan.getPlan_rating().size(); i++) {
+            Rating r = currPlan.getPlan_rating().get(i);
+            if(r.getUserId().equals(sp.getString(UserKeys.ID_KEY.name(), null))) {
+                r.setRating(rating);
+                found = true;
+            }
+            sum += r.getRating();
+        }
+        if(!found) {
+            currPlan.getPlan_rating().add(new Rating(sp.getString(UserKeys.ID_KEY.name(), null), rating));
+        }
+        currPlan.setPlan_average_rating(sum/currPlan.getPlan_rating().size());
+
+        dbHelper.addPlan(currPlan);
+        dbHelper.sharePlan(currPlan);
         fab_confirm.setVisibility(View.GONE);
-        Toast.makeText(this, "Rated Plan!",  Toast.LENGTH_SHORT).show();
+        if(!found)
+            Toast.makeText(this, "Plan rated!",  Toast.LENGTH_SHORT).show();
+        else
+            Toast.makeText(this, "Plan rating updated!",  Toast.LENGTH_SHORT).show();
     }
 
     ValueEventListener valueEventListener = new ValueEventListener() {
@@ -166,6 +201,7 @@ public class ViewPlanActivity extends AppCompatActivity {
                     Plan curr_plan = dataSnapshot.getValue(Plan.class);
                     item_list.addAll(curr_plan.getPlan_items());
                     route_list.addAll(curr_plan.getPlan_route());
+                    rating_list.addAll(curr_plan.getPlan_rating());
                 }
                 itemListAdapter.notifyDataSetChanged();
                 planRoutesAdapter.notifyDataSetChanged();

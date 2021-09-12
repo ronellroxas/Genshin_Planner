@@ -10,7 +10,8 @@ public class Plan {
     private ArrayList<Item> plan_items;
     private ArrayList<String> plan_route;
     private int plan_resin_spent;
-    private ArrayList<Rating> plan_rating;
+    private ArrayList<Rating> plan_rating = new ArrayList<Rating>();
+    private float plan_average_rating;
 
     public Plan(){
     }
@@ -23,7 +24,6 @@ public class Plan {
         this.plan_items = plan_items;
         this.plan_route = plan_route;
         this.plan_resin_spent = plan_resin_spent;
-        this.plan_rating = new ArrayList<Rating>();
     }
 
     public String getPlan_id() {
@@ -97,4 +97,7 @@ public class Plan {
         this.plan_resin_spent = plan_resin_spent;
     }
 
+    public void setPlan_average_rating(float plan_average_rating) {
+        this.plan_average_rating = plan_average_rating;
+    }
 }
