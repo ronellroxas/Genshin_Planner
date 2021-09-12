@@ -224,9 +224,9 @@ public class CreatePlanActivity extends AppCompatActivity {
                 FirebasePlanDBHelper dbHelper = new FirebasePlanDBHelper();
 
                 if(intent.getStringExtra(PlanKeys.PLAN_TITLE_KEY.name()) != null){
-                    dbHelper.addPlan(new Plan(dbHelper.getReference().getKey(), user, title, desc, items, routes, Integer.parseInt(resin), 0));
+                    dbHelper.addPlan(new Plan(dbHelper.getReference().getKey(), user, title, desc, items, routes, Integer.parseInt(resin)));
                 }else{
-                    dbHelper.addPlan(new Plan(dbHelper.getReference().push().getKey(), user, title, desc, items, routes, Integer.parseInt(resin), 0));
+                    dbHelper.addPlan(new Plan(dbHelper.getReference().push().getKey(), user, title, desc, items, routes, Integer.parseInt(resin)));
                 }
 
                 Intent new_intent = new Intent(CreatePlanActivity.this, PlanListActivity.class);

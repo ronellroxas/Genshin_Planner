@@ -15,7 +15,7 @@ public class Plan {
     public Plan(){
     }
 
-    public Plan(String plan_id, User plan_owner, String plan_title, String plan_description, ArrayList<Item> plan_items, ArrayList<String> plan_route, int plan_resin_spent, ArrayList<Rating> plan_rating){
+    public Plan(String plan_id, User plan_owner, String plan_title, String plan_description, ArrayList<Item> plan_items, ArrayList<String> plan_route, int plan_resin_spent){
         this.plan_id = plan_id;
         this.plan_owner = plan_owner;
         this.plan_title = plan_title;
@@ -23,7 +23,7 @@ public class Plan {
         this.plan_items = plan_items;
         this.plan_route = plan_route;
         this.plan_resin_spent = plan_resin_spent;
-        this.plan_rating = plan_rating;
+        this.plan_rating = new ArrayList<Rating>();
     }
 
     public String getPlan_id() {
