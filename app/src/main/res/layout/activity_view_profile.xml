@@ -272,6 +272,8 @@
         app:layout_constraintBottom_toTopOf="@+id/gl_bot_main"
         app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_left_main"
-        app:layout_constraintTop_toBottomOf="@+id/btn_view_prof_edit_prof" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_view_prof_edit_prof"
+        android:backgroundTint="#6E6D6D"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
