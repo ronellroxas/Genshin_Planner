@@ -11,6 +11,7 @@ import com.mobdeve.s13.g26.genshinplanner.utils.AssetsHelper;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,12 +22,17 @@ public class ItemListActivity extends AppCompatActivity {
 
     private RecyclerView rvList;
     private ItemListAdapter clAdapter;
+    private TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_list);
         itemList = new ArrayList<>();
+
+        this.tvTitle = findViewById(R.id.tv_list_title);
+        this.tvTitle.setText("Items");
+
         initRecyclerAdapter();
     }
 

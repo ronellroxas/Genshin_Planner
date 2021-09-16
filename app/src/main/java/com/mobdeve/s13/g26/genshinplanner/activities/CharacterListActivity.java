@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 
 import com.mobdeve.s13.g26.genshinplanner.adapters.CharacterListAdapter;
@@ -25,6 +26,7 @@ public class CharacterListActivity extends AppCompatActivity {
     private AssetsHelper assetsHelper;
     private RecyclerView rvList;
     private CharacterListAdapter clAdapter;
+    private TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,10 @@ public class CharacterListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_character_list);
         charList = new ArrayList<>();
+
+        this.tvTitle = findViewById(R.id.tv_list_title);
+        this.tvTitle.setText("Characters");
+
         initRecyclerAdapter();
     }
 
@@ -41,7 +47,7 @@ public class CharacterListActivity extends AppCompatActivity {
         this.rvList = findViewById(R.id.rv_list);
         this.clAdapter = new CharacterListAdapter(this.charList);
 
-        this.rvList.setLayoutManager(new GridLayoutManager(this, 4));
+        this.rvList.setLayoutManager(new GridLayoutManager(this, 3));
         this.rvList.setAdapter(this.clAdapter);
     }
 
@@ -557,19 +563,4 @@ public class CharacterListActivity extends AppCompatActivity {
         }
     }
 
-//    private void getImageResources() {
-//        Field[] fields = R.drawable.class.getDeclaredFields();
-//
-//        try {
-//            for (int i = 0; i < fields.length; i++) {
-//                String filename = fields[i].getName();
-//
-//                if (filename.contains("characters_")) //remove filenames with _
-//                    this.charList.add(fields[i].getInt(null));
-//            }
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

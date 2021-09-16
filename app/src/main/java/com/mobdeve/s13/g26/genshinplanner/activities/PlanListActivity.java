@@ -61,6 +61,7 @@ public class PlanListActivity extends AppCompatActivity {
             v.getContext().startActivity(intent);
         });
         planArrayList = new ArrayList<>();
+
         loadData();
         initRecyclerAdapter();
     }
