@@ -95,6 +95,18 @@
       "name": "Violetgrass",
       "characters": ["qiqi", "xinyan"],
       "sources": "Found on the beaches of Liyue"
+    },
+    {
+      "id": "crystal-marrow",
+      "name": "Crystal Marrow",
+      "characters": ["xingqui"],
+      "sources": "Found on Orobashi's bones on Yashiori Island, Found near Tatarasuna, Sea level west of Mikage Furnace"
+    },
+    {
+      "id": "sakura-bloom",
+      "name": "Sakura Bloom",
+      "characters": ["ayaka"],
+      "sources": "Found around Mt. Yougou, Found around Grand Narukami Shrine"
     }
   ]
 }
