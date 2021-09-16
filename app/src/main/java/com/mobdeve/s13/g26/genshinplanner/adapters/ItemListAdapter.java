@@ -40,10 +40,10 @@ public class ItemListAdapter extends RecyclerView.Adapter<ItemListViewHolder> {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ViewItemActivity.class);
                 Item curr_item = itemList.get(ilViewHolder.getBindingAdapterPosition());
-                String type = "Type: ";
+                String type = "";
                 String obtain = "";
                 for(int i = 0; i < curr_item.getItem_types().size(); i++){
-                    type = type + curr_item.getItem_types().get(i)+ ", ";
+                    type = curr_item.getItem_types().get(i)+ ", ";
                 }
 
                 for(int j = 0; j < curr_item.getItem_obtain_ways().size(); j++){
