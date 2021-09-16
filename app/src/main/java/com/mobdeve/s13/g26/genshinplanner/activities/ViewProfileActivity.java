@@ -29,7 +29,6 @@ public class ViewProfileActivity extends AppCompatActivity {
     private TextView tv_name;
     private TextView tv_uid;
     private TextView tv_email;
-
     private Button btnEditProfile;
     private Button btnSignout;
 
