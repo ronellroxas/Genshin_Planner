@@ -136,7 +136,12 @@ public class CreatePlanActivity extends AppCompatActivity {
         this.spinnerAddRoute = findViewById(R.id.spinner_create_plan_routes);
 
         //load routes selection to spinner
-        String[] arrSpinnerRoutes = {"", "Inazuma", "Liyue", "Monstadt", "Bahay ni Howard", "Bahay ni A.."};
+        String[] arrSpinnerRoutes = {"", "Brightcrown Mountains", "Galesong Hill", "Starfell Valley", "Windwail Highland", "Dragonspine", "Mondstat",
+                                    "Cider Lake", "Falcon Coast", "Cape Oath", "Dawn Winery", "Springvale", "Thousand Winds Temple", "Musk Reef", "Bishui PLain",
+                                    "Minlin", "Qiongji Estuary", "Lisha", "Sea of Clouds", "Liyue Harbor", "Mt. Tianheng", "Dihua Marsh", "Wangshu Inn", "Qingce Village",
+                                    "Jueyun Karst", "Narukami Island", "Kannazuka", "Yashiori Island", "Seirai Island", "Watatsumi Island", "Tsurumi Island", "Inazuma City",
+                                    "Ritou", "Konda Village", "Chinju Forest", "Grand Narukami Shrine", "Tatarasuna", "Kujou Encampment", "Nazuchi Beach", "Musoujin Gorge",
+                                    "Serpent's Head"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, arrSpinnerRoutes);
         spinnerAddRoute.setAdapter(adapter);
 
