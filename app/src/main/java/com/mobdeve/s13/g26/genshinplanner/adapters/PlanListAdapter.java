@@ -1,6 +1,7 @@
 package com.mobdeve.s13.g26.genshinplanner.adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,7 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.activities.CreatePlanActivity;
+import com.mobdeve.s13.g26.genshinplanner.activities.MainActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.PlanListActivity;
+import com.mobdeve.s13.g26.genshinplanner.activities.RegisterActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.SearchPlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewPlanActivity;
 import com.mobdeve.s13.g26.genshinplanner.activities.ViewProfileActivity;
@@ -32,6 +36,7 @@ import com.mobdeve.s13.g26.genshinplanner.keys.UserKeys;
 import com.mobdeve.s13.g26.genshinplanner.models.Plan;
 import com.mobdeve.s13.g26.genshinplanner.models.User;
 import com.mobdeve.s13.g26.genshinplanner.utils.FirebasePlanDBHelper;
+import com.mobdeve.s13.g26.genshinplanner.utils.FirebaseUserDBHelper;
 import com.mobdeve.s13.g26.genshinplanner.views.ItemListViewHolder;
 import com.mobdeve.s13.g26.genshinplanner.views.PlanListViewHolder;
 
@@ -45,7 +50,6 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
     private ArrayList<Plan> planArrayList;
     public Context cxt;
     private FirebasePlanDBHelper dbHelper;
-    private String[] arrOptions;
 
     public PlanListAdapter(ArrayList<Plan> pl, Context cxt){
         this.planArrayList = pl;
@@ -133,10 +137,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         Spinner spinnerOptions = holder.getSpinnerOptions();
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(cxt);
 
-        arrOptions = new String[]{"", "Edit Plan", "Share Plan", "Remove Plan"};
-
-        if(holder.getBindingAdapterPosition() >= 0)
-            isPlanShared(holder.getBindingAdapterPosition());
+        String[] arrOptions = new String[]{"", "Edit Plan", "Share Plan", "Remove Plan"};
 
         //change options if viewing from searchPlan
         if(cxt instanceof SearchPlanActivity) {
@@ -147,15 +148,22 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         spinnerOptions.setAdapter(adapter);
 
         //attach listener
+        String[] finalArrOptions = arrOptions;
         spinnerOptions.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             Boolean start = true;
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 TextView tvView = (TextView)view;
                 tvView.setText(null);
+                Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
+
+                if(start) {
+                    isPlanShared(curr_plan, finalArrOptions);
+                    ArrayAdapter<String> adapter = new ArrayAdapter<>(cxt, R.layout.support_simple_spinner_dropdown_item, finalArrOptions);
+                    spinnerOptions.setAdapter(adapter);
+                }
 
                 if(!start) {
-                    Plan curr_plan = planArrayList.get(holder.getBindingAdapterPosition());
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("Edit Plan")) {
                         Intent intent = new Intent(cxt, CreatePlanActivity.class);
 
@@ -172,11 +180,36 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("share plan")) {
                         dbHelper.sharePlan(curr_plan);
+                        finalArrOptions[2] = "Unshare Plan";
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(cxt, R.layout.support_simple_spinner_dropdown_item, finalArrOptions);
+                        spinnerOptions.setAdapter(adapter);
+                        Toast.makeText(cxt, "Plan shared.",Toast.LENGTH_SHORT).show();
+                    }
+                    if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("unshare plan")) {
+                        dbHelper.deleteSharedPlan(curr_plan.getPlan_id());
+                        Toast.makeText(cxt, "Plan unshared.",Toast.LENGTH_SHORT).show();
+                        finalArrOptions[2] = "Share Plan";
+                        ArrayAdapter<String> adapter = new ArrayAdapter<>(cxt, R.layout.support_simple_spinner_dropdown_item, finalArrOptions);
+                        spinnerOptions.setAdapter(adapter);
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("remove plan")) {
-                        dbHelper.deletePlan(curr_plan.getPlan_id());
-                        planArrayList.remove(curr_plan);
-                        PlanListAdapter.this.notifyDataSetChanged();
+                        new AlertDialog.Builder(cxt)
+                                .setTitle("Delete Plan")
+                                .setMessage("Permanently delete plan " + curr_plan.getPlan_title() +"? \n(NOTE: If this is not an imported plan it will be lost forever.)")
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dbHelper.deletePlan(curr_plan.getPlan_id());
+                                        dbHelper.deleteSharedPlan(curr_plan.getPlan_id());
+                                        Toast.makeText(cxt, "Plan deleted.",Toast.LENGTH_SHORT).show();
+                                        planArrayList.remove(curr_plan);
+                                        PlanListAdapter.this.notifyDataSetChanged();
+                                    }
+                                })
+                                .setNegativeButton(android.R.string.no, null)
+                                .setIcon(android.R.drawable.stat_sys_warning)
+                                .show();
+
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("save plan")) {
                         String userId = sp.getString(UserKeys.ID_KEY.name(), null);
@@ -185,10 +218,35 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                         String username = sp.getString(UserKeys.USERNAME_KEY.name(), null);
                         String uid = sp.getString(UserKeys.UID_KEY.name(), null);
                         String main = sp.getString(UserKeys.MAIN_KEY.name(), null);
-                        curr_plan.setPlan_owner(new User(userId, email, name, username, uid, main));
-                        curr_plan.setPlan_id(dbHelper.getReference().push().getKey());
-                        dbHelper.addPlan(curr_plan);
-                        Toast.makeText(cxt, "Plan " + curr_plan.getPlan_title() + " saved.",Toast.LENGTH_SHORT).show();
+
+                        //check if yours
+                        dbHelper.getReference().orderByChild("plan_id").equalTo(curr_plan.getPlan_id()).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                boolean found = false;
+                                if(snapshot.exists()) {
+                                    for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                                        //Log.d("CHILD", dataSnapshot.getValue(Plan.class).getPlan_owner().getUserId());
+                                        if(dataSnapshot.getValue(Plan.class).getPlan_owner().getUserId().equalsIgnoreCase(userId)) {
+                                            Toast.makeText(cxt, "This Plan is yours and already saved.", Toast.LENGTH_SHORT).show();
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if(!found) {
+                                    curr_plan.setPlan_owner(new User(userId, email, name, username, uid, main));
+                                    curr_plan.setPlan_id(dbHelper.getReference().push().getKey());
+                                    dbHelper.addPlan(curr_plan);
+                                    Toast.makeText(cxt, "Plan saved.",Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 }
                 start = false;
@@ -201,11 +259,11 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         });
     }
 
-    private void isPlanShared(int position) {
-        dbHelper.getSharedReference().orderByChild("plan_id").equalTo(planArrayList.get(position).getPlan_id()).addValueEventListener(new ValueEventListener() {
+    private void isPlanShared(Plan curr_plan, String[] arrOptions) {
+        dbHelper.getSharedReference().orderByChild("plan_id").equalTo(curr_plan.getPlan_id()).limitToFirst(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot.exists())
+                if(snapshot.getValue() != null && !(cxt instanceof SearchPlanActivity))
                     arrOptions[2] = "Unshare Plan";
             }
 
