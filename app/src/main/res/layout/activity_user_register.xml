@@ -9,6 +9,15 @@
     android:backgroundTint="#66000000"
     android:backgroundTintMode="src_over">
 
+    <Button
+        android:id="@+id/btn_register_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#6E6D6D"
+        android:text="Cancel"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bot_main"
+        app:layout_constraintEnd_toStartOf="@+id/gl_right_main" />
+
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -173,19 +182,16 @@
         android:text="@string/save_profile"
         app:iconTint="#FF9401"
         app:layout_constraintBottom_toTopOf="@+id/gl_bot_main"
-        app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
         app:layout_constraintStart_toStartOf="@+id/gl_left_main" />
 
     <Button
         android:id="@+id/btn_register_delete"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#BA0000"
         android:text="Delete Profile"
+        android:visibility="visible"
         app:layout_constraintEnd_toStartOf="@+id/gl_right_main"
-        app:layout_constraintStart_toStartOf="@+id/gl_left_main"
-        app:layout_constraintTop_toTopOf="@+id/gl_bot_main"
-        android:visibility="gone"
-        />
+        app:layout_constraintTop_toTopOf="@+id/gl_top_main" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

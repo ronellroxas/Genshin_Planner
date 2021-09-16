@@ -37,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseUserDBHelper userDBHelper;
     private Button btnSaveProfile;
     private Button btnDeleteProfile;
+    private Button btnCancel;
     private SharedPreferences sp;
 
     private EditText etEmail;
@@ -93,6 +94,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void initializeButtons() {
         this.btnSaveProfile = findViewById(R.id.btn_register_saveprofile);
         this.btnDeleteProfile = findViewById(R.id.btn_register_delete);
+        this.btnCancel = findViewById(R.id.btn_register_cancel);
+
         btnSaveProfile.setOnClickListener(v -> {
             if (isFormFilled()) {
                 Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
@@ -107,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         //if editing user only
         if(sp.getString(UserKeys.USERNAME_KEY.name(), null) != null) {
+            btnCancel.setVisibility(View.VISIBLE);
             btnDeleteProfile.setVisibility(View.VISIBLE);
 
             btnDeleteProfile.setOnClickListener(v -> {

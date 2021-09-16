@@ -176,6 +176,7 @@
         android:layout_height="wrap_content"
         android:text="Save Plan"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_create_plan_cancel"
         app:layout_constraintStart_toStartOf="@+id/guideline12"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -183,10 +184,12 @@
         android:id="@+id/btn_create_plan_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#6E6D6D"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        android:visibility="gone"/>
 
     <Spinner
         android:id="@+id/spinner_create_plan_items"
