@@ -88,7 +88,7 @@ public class SearchPlanActivity extends AppCompatActivity {
                     if(searchText == null)
                         planArrayList.add(curr_plan);
                     else {
-                        if(curr_plan.getPlan_title().contains(searchText))
+                        if(curr_plan.getPlan_title().toLowerCase().contains(searchText.toLowerCase()))
                             planArrayList.add(curr_plan);
                     }
                 }
