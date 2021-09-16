@@ -172,8 +172,6 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("share plan")) {
                         dbHelper.sharePlan(curr_plan);
-                        adapter.getItem(2).replace("Share", "Unshare");
-                        adapter.notifyDataSetChanged();
                     }
                     if(spinnerOptions.getSelectedItem().toString().equalsIgnoreCase("remove plan")) {
                         dbHelper.deletePlan(curr_plan.getPlan_id());

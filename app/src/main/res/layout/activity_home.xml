@@ -14,7 +14,7 @@
         android:id="@+id/btn_home_srhplans"
         android:layout_width="108dp"
         android:layout_height="108dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="12dp"
         android:background="@null"
         android:scaleType="fitCenter"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
