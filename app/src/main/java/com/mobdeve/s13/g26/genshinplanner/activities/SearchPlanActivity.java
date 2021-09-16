@@ -95,12 +95,12 @@ public class SearchPlanActivity extends AppCompatActivity {
                 if(planArrayList.size() == 0)
                     Toast.makeText(SearchPlanActivity.this, "No plans found, try a different keyword.",
                             Toast.LENGTH_LONG).show();
-                plAdapter.notifyDataSetChanged();
             }
             else {
                 Toast.makeText(SearchPlanActivity.this, "No plans found, try a different keyword.",
                         Toast.LENGTH_LONG).show();
             }
+            plAdapter.notifyDataSetChanged();
             pbLoading.setVisibility(View.GONE);
             rvPlanList.setVisibility(View.VISIBLE);
         }
@@ -133,8 +133,8 @@ public class SearchPlanActivity extends AppCompatActivity {
                 FirebasePlanDBHelper dbHelper = new FirebasePlanDBHelper();
 
                 Plan baitPlan = new Plan(dbHelper.getReference().push().getKey(), new User(), "NULL", "NULL", null, null, 0);
-                dbHelper.addPlan(baitPlan);
-                dbHelper.deletePlan(baitPlan.getPlan_id());
+                dbHelper.sharePlan(baitPlan);
+                dbHelper.deleteSharedPlan(baitPlan.getPlan_id());
 
                 //hide loading
                 pbLoading.setVisibility(View.GONE);
