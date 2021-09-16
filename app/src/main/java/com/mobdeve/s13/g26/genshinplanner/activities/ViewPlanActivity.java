@@ -186,7 +186,6 @@ public class ViewPlanActivity extends AppCompatActivity {
         }
         curr_plan.setPlan_average_rating((sum/(float)curr_plan.getPlan_rating().size()));
 
-        Log.d("TAG", String.valueOf(curr_plan.getPlan_average_rating()));
         dbHelper.addPlan(curr_plan);
         dbHelper.sharePlan(curr_plan);
         fab_confirm.setVisibility(View.GONE);
@@ -202,11 +201,11 @@ public class ViewPlanActivity extends AppCompatActivity {
             String userId = sp.getString(UserKeys.ID_KEY.name(), null);
             if(!userId.equals(curr_plan.getPlan_owner().getUserId())) {
                 rb_rating.setIsIndicator(false);
-                tvRatingText.setText("Rate this Plan");
+                tvRatingText.setText("Rate this Plan (" + curr_plan.getPlan_rating().size() + " users)");
             }
             else {
                 rb_rating.setIsIndicator(true);
-                tvRatingText.setText("Plan Rating");
+                tvRatingText.setText("Plan Rating (" + curr_plan.getPlan_rating().size() + " users)");
             }
         }
     }

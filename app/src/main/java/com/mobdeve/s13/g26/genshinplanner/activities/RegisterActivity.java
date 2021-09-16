@@ -2,13 +2,16 @@ package com.mobdeve.s13.g26.genshinplanner.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private FirebaseUserDBHelper userDBHelper;
     private Button btnSaveProfile;
+    private Button btnDeleteProfile;
     private SharedPreferences sp;
 
     private EditText etEmail;
@@ -49,23 +53,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_register);
 
-        this.btnSaveProfile = findViewById(R.id.btn_register_saveprofile);
-
         this.userDBHelper = new FirebaseUserDBHelper();
         this.sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         initializeFields();
-        btnSaveProfile.setOnClickListener(v -> {
-            if (isFormFilled()) {
-                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-
-                saveUser();
-                finish();
-                startActivity(intent);
-            } else {
-                Toast.makeText(RegisterActivity.this, "Please fill-up empty fields.", Toast.LENGTH_SHORT).show();
-            }
-        });
+        initializeButtons();
     }
 
     private void initializeFields() {
@@ -96,6 +88,52 @@ public class RegisterActivity extends AppCompatActivity {
             etUid.setText(uid);
             spinnerMain.setSelection(adapter.getPosition(main));
         }
+    }
+
+    private void initializeButtons() {
+        this.btnSaveProfile = findViewById(R.id.btn_register_saveprofile);
+        this.btnDeleteProfile = findViewById(R.id.btn_register_delete);
+        btnSaveProfile.setOnClickListener(v -> {
+            if (isFormFilled()) {
+                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+
+                saveUser();
+                finish();
+                startActivity(intent);
+            } else {
+                Toast.makeText(RegisterActivity.this, "Please fill-up empty fields.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //if editing user only
+        if(sp.getString(UserKeys.USERNAME_KEY.name(), null) != null) {
+            btnDeleteProfile.setVisibility(View.VISIBLE);
+
+            btnDeleteProfile.setOnClickListener(v -> {
+               new AlertDialog.Builder(RegisterActivity.this)
+                       .setTitle("Delete Account")
+                       .setMessage("Are you sure you want to PERMANENTLY delete your account?")
+                       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               FirebaseUserDBHelper userDBHelper = new FirebaseUserDBHelper();
+                               userDBHelper.deleteAccount(sp.getString(UserKeys.EMAIL_KEY.name(), null),
+                                                          sp.getString(UserKeys.ID_KEY.name(), null));
+
+                               Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                               sp.edit().clear().commit(); //clear preferences
+                               Toast.makeText(RegisterActivity.this,
+                                       "Account deleted!",
+                                       Toast.LENGTH_SHORT).show();
+                               startActivity(intent);
+                           }
+                       })
+                       .setNegativeButton(android.R.string.no, null)
+                       .setIcon(android.R.drawable.stat_sys_warning)
+                       .show();
+            });
+        }
+
     }
 
     private Boolean isFormFilled() {
