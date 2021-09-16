@@ -59,11 +59,13 @@ public class Plan {
     }
 
     public float getPlan_average_rating() {
-        float temp = 0;
-        for (Rating r: plan_rating) {
-            temp += r.getRating();
-        }
-        return temp;
+        return plan_average_rating;
+//        float temp = 0;
+//        for (Rating r: plan_rating) {
+//            temp += r.getRating();
+//        }
+//
+//        return temp;
     }
     public void setPlan_id(String plan_id) {
         this.plan_id = plan_id;

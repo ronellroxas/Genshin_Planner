@@ -184,8 +184,9 @@ public class ViewPlanActivity extends AppCompatActivity {
         if(!found) {
             curr_plan.getPlan_rating().add(new Rating(sp.getString(UserKeys.ID_KEY.name(), null), rating));
         }
-        curr_plan.setPlan_average_rating(sum/curr_plan.getPlan_rating().size());
+        curr_plan.setPlan_average_rating((sum/(float)curr_plan.getPlan_rating().size()));
 
+        Log.d("TAG", String.valueOf(curr_plan.getPlan_average_rating()));
         dbHelper.addPlan(curr_plan);
         dbHelper.sharePlan(curr_plan);
         fab_confirm.setVisibility(View.GONE);

@@ -100,6 +100,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListViewHolder> {
         holder.setRatingPlan(curr_plan.getPlan_average_rating());
         holder.setResinPlan("" + curr_plan.getPlan_resin_spent());
         holder.setCreatorPlan(curr_plan.getPlan_owner().getUsername());
+        holder.setRatingCount(curr_plan.getPlan_rating().size());
 
 
         ItemListAdapter itemListAdapter = new ItemListAdapter(curr_plan.getPlan_items());

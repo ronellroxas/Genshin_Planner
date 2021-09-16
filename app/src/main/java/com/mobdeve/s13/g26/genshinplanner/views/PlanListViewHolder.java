@@ -14,6 +14,7 @@ import com.mobdeve.s13.g26.genshinplanner.R;
 import com.mobdeve.s13.g26.genshinplanner.adapters.ItemListAdapter;
 
 import org.jetbrains.annotations.NotNull;
+import org.w3c.dom.Text;
 
 public class PlanListViewHolder extends RecyclerView.ViewHolder {
     private ConstraintLayout cl_plan_template;
@@ -24,6 +25,7 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
     private TextView tv_plan_resin;
     private RatingBar rb_start_rate;
     private Spinner spinnerOptions;
+    private TextView tv_plan_rating_count;
 
     private RecyclerView rv_data_list_plan;
     public PlanListViewHolder(@NonNull @NotNull View itemView) {
@@ -37,6 +39,7 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
         this.rb_start_rate = itemView.findViewById(R.id.rb_list_plan_rating);
         this.rv_data_list_plan = itemView.findViewById(R.id.rv_data_list_plan);
         this.spinnerOptions = itemView.findViewById(R.id.spinner_list_plan_options);
+        this.tv_plan_rating_count = itemView.findViewById(R.id.tv_data_plan_rating_num);
     }
 
     public void setImagePlan(int image){
@@ -61,6 +64,10 @@ public class PlanListViewHolder extends RecyclerView.ViewHolder {
 
     public void setRatingPlan(float rating){
         rb_start_rate.setRating(rating);
+    }
+
+    public void setRatingCount(int count) {
+        tv_plan_rating_count.setText("(" + String.valueOf(count) + ")");
     }
 
     public void setDataListLayoutManager(RecyclerView.LayoutManager lm){
