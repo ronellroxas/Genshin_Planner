@@ -111,6 +111,7 @@
         android:id="@+id/tv_plan_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
         android:gravity="center"
         android:text="TextView"
         android:textColor="@color/white"
